@@ -14,12 +14,6 @@ namespace WebCiv.Engine
         /// <summary>
         /// Population of the civilization
         /// </summary>
-        public Population Population
-        {
-            get => default;
-            set
-            {
-            }
-        }
+        public Population Population { get; set; } = new Population();
     }
 }
