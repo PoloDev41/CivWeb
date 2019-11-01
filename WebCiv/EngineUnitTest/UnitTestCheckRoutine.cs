@@ -1,7 +1,5 @@
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.TestHost;
-using Moq;
 using NUnit.Framework;
 using System.Net;
 using System.Net.Http;
