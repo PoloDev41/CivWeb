@@ -7,14 +7,13 @@ namespace WebCiv.Engine
     public class Civilization
     {
         /// <summary>
+        /// Id of the civilization
+        /// </summary>
+        public int Id { get; set; }
+
+        /// <summary>
         /// Population of the civilization
         /// </summary>
-        public Population Population
-        {
-            get => default;
-            set
-            {
-            }
-        }
+        public Population Population { get; set; } = new Population();
     }
 }

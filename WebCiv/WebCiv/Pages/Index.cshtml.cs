@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using WebCiv.Configuration;
 
 namespace WebCiv.Pages
 {
@@ -19,7 +20,12 @@ namespace WebCiv.Pages
 
         public void OnGet()
         {
+            User user = new User() { Name = "myName" };
+            user.UserCiv = new Engine.Civilization();
+            user.UserCiv.Population.TotalPop = 10;
 
+            ViewData["UserName"] = user.Name;
+            ViewData["NbrPop"] = user.UserCiv.Population.TotalPop;
         }
     }
 }
