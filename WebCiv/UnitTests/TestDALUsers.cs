@@ -24,12 +24,29 @@ namespace EngineUnitTest
             {
                 var users = dal.GetAllUsers();
                 int OriginalCount = users.Count;
-                dal.CreateUser("FirstUser");
+                Assert.IsTrue(dal.CreateUser("FirstUser"));
                 users = dal.GetAllUsers();
 
                 Assert.IsNotNull(users);
                 Assert.AreEqual(OriginalCount + 1, users.Count);
                 Assert.AreEqual("FirstUser", users[users.Count-1].Name);
+            }
+        }
+
+        [Test]
+        public void CreateSameUser_CheckSecondWasnt()
+        {
+            using (IDAL_User dal = new DAL_User())
+            {
+                var users = dal.GetAllUsers();
+                int OriginalCount = users.Count;
+                Assert.IsTrue(dal.CreateUser("Double"));
+                Assert.IsFalse(dal.CreateUser("Double"));
+                users = dal.GetAllUsers();
+
+                Assert.IsNotNull(users);
+                Assert.AreEqual(OriginalCount + 1, users.Count);
+                Assert.AreEqual("Double", users[users.Count - 1].Name);
             }
         }
     }

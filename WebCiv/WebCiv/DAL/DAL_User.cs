@@ -45,10 +45,19 @@ namespace WebCiv.DAL
         /// create a new user
         /// </summary>
         /// <param name="name">name of the user</param>
-        public void CreateUser(string name)
+        /// <returns>true: user was created</returns>
+        public bool CreateUser(string name)
         {
-            this.BDD_user.Users.Add(new User { Name = name });
-            this.BDD_user.SaveChanges();
+            try
+            {
+                this.BDD_user.Users.Add(new User { Name = name });
+                this.BDD_user.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

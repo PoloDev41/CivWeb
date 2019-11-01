@@ -21,6 +21,7 @@ namespace WebCiv.DAL
         /// create a new user
         /// </summary>
         /// <param name="name">name of the user</param>
-        void CreateUser(string name);
+        /// <returns>true: user was created</returns>
+        bool CreateUser(string name);
     }
 }
