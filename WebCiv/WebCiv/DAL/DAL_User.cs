@@ -48,6 +48,7 @@ namespace WebCiv.DAL
         public void CreateUser(string name)
         {
             this.BDD_user.Users.Add(new User { Name = name });
+            this.BDD_user.SaveChanges();
         }
     }
 }
