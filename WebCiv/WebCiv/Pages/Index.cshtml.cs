@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using WebCiv.Configuration;
-using WebCiv.Pages.Shared;
 
 namespace WebCiv.Pages
 {
