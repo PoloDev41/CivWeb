@@ -11,6 +11,8 @@ namespace WebCiv.Pages
 {
     public class IndexModel : PageModel
     {
+        public User user;
+
         private readonly ILogger<IndexModel> _logger;
 
         public IndexModel(ILogger<IndexModel> logger)
@@ -20,12 +22,9 @@ namespace WebCiv.Pages
 
         public void OnGet()
         {
-            User user = new User() { Name = "myName" };
+            user = new User() { Name = "UserName" };
             user.UserCiv = new Engine.Civilization();
             user.UserCiv.Population.TotalPop = 10;
-
-            ViewData["UserName"] = user.Name;
-            ViewData["NbrPop"] = user.UserCiv.Population.TotalPop;
         }
     }
 }

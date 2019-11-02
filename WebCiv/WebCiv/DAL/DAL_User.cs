@@ -53,7 +53,7 @@ namespace WebCiv.DAL
                 this.BDD_user.Users.Add(new User { Name = name });
                 this.BDD_user.SaveChanges();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
