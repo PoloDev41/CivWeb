@@ -13,6 +13,6 @@ namespace WebCiv.Engine
         /// <summary>
         /// number of total population
         /// </summary>
-        public int TotalPop { get; set; }
+        public double TotalPop { get; set; }
     }
 }
