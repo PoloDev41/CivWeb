@@ -59,5 +59,15 @@ namespace WebCiv.DAL
             }
             return true;
         }
+
+        /// <summary>
+        /// return the user with the maximum of population
+        /// </summary>
+        /// <returns>user with the maximum of pop</returns>
+        public User GetUserMaxPop()
+        {
+            this.BDD_user.Users
+                .Where(x => x.UserCiv.Population.TotalPop == this.BDD_user.Users.Max(x.UserCiv.Population.TotalPop));
+        }
     }
 }

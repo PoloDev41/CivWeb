@@ -78,3 +78,4 @@ _[Ss]cripts
 *.testlog
 WebCiv/.vs/WebCiv/DesignTimeBuild/.dtbcache
 WebCiv/.vs/WebCiv/v16/Server/sqlite3/storage.ide
+*.ide
