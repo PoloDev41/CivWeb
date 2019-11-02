@@ -76,7 +76,5 @@ _[Ss]cripts
 *.ide-shm
 *.ide-wal
 *.testlog
-WebCiv/.vs/WebCiv/DesignTimeBuild/.dtbcache
-WebCiv/.vs/WebCiv/v16/Server/sqlite3/storage.ide
-WebCiv/.vs/WebCiv/DesignTimeBuild/.dtbcache
-WebCiv/.vs/WebCiv/v16/Server/sqlite3/storage.ide
+*.dtbcache
+*.ide
