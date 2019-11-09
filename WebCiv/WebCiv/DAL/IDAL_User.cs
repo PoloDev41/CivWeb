@@ -20,17 +20,17 @@ namespace WebCiv.DAL
         /// <summary>
         /// create a player profil to a user
         /// </summary>
-        /// <param name="name">name of the user</param>
+        /// <param name="gameName">name of the user</param>
         /// <param name="userId">Id of the user</param>
         /// <returns>true: user was created</returns>
-        public bool CreatePlayer(int userId, string name);
+        public bool CreatePlayer(int userId, string gameName);
 
         /// <summary>
         /// create a player profil with no user (mainly for test purpose only)
         /// </summary>
-        /// <param name="name">name of the user</param>
+        /// <param name="gameName">name of the user</param>
         /// <returns>true: user was created</returns>
-        public bool CreatePlayer(string name);
+        public bool CreatePlayer(string gameName);
 
         /// <summary>
         /// return the user with the maximum of population

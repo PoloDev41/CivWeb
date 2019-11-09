@@ -17,7 +17,7 @@ namespace WebCiv.Configuration
         /// <summary>
         /// name of the user
         /// </summary>
-        [Key, MaxLength(24), Column(Order = 100)]
+        [MaxLength(24), Column(Order = 100)]
         public string GameName { get; set; }
 
         /// <summary>

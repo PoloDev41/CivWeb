@@ -59,18 +59,22 @@ namespace WebCiv.DAL
         /// <summary>
         /// create a new user
         /// </summary>
-        /// <param name="name">name of the user</param>
+        /// <param name="gameName">name of the user</param>
         /// <param name="password">password of the user</param>
         /// <returns>true: user was created</returns>
-        public bool CreatePlayer(int userId, string name)
+        public bool CreatePlayer(int userId, string gameName)
         {
             try
             {
                 var user = BDD_user.Users.FirstOrDefault(u => u.Id == userId);
                 if(user != null)
                 {
-                    user.GameName = name;
-                    this.BDD_user.SaveChanges();
+                    var inBdd = BDD_user.Users.FirstOrDefault(u => u.GameName == gameName);
+                    if(inBdd == null)
+                    {
+                        user.GameName = gameName;
+                        this.BDD_user.SaveChanges();
+                    }
                 }
                 else
                 {
@@ -90,11 +94,11 @@ namespace WebCiv.DAL
         /// </summary>
         /// <param name="name">name of the user</param>
         /// <returns>true: user was created</returns>
-        public bool CreatePlayer(string name)
+        public bool CreatePlayer(string gameName)
         {
             try
             {
-                BDD_user.Users.Add(new AppUser() { GameName = name });
+                BDD_user.Users.Add(new AppUser() { GameName = gameName });
                 this.BDD_user.SaveChanges();
             }
             catch (Exception)
