@@ -98,14 +98,19 @@ namespace WebCiv.DAL
         {
             try
             {
-                BDD_user.Users.Add(new AppUser() { GameName = gameName });
-                this.BDD_user.SaveChanges();
+                var inBdd = BDD_user.Users.FirstOrDefault(u => u.GameName == gameName);
+                if(inBdd == null)
+                {
+                    BDD_user.Users.Add(new AppUser() { GameName = gameName });
+                    this.BDD_user.SaveChanges();
+                    return true;
+                }
             }
             catch (Exception)
             {
                 return false;
             }
-            return true;
+            return false;
         }
 
         /// <summary>
