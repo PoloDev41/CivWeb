@@ -15,13 +15,27 @@ namespace WebCiv.DAL
         /// get all user
         /// </summary>
         /// <returns>users</returns>
-        List<User> GetAllUsers();
+        List<AppUser> GetAllUsers();
 
         /// <summary>
-        /// create a new user
+        /// create a player profil to a user
         /// </summary>
-        /// <param name="name">name of the user</param>
+        /// <param name="gameName">name of the user</param>
+        /// <param name="userId">Id of the user</param>
         /// <returns>true: user was created</returns>
-        bool CreateUser(string name);
+        public bool CreatePlayer(int userId, string gameName);
+
+        /// <summary>
+        /// create a player profil with no user (mainly for test purpose only)
+        /// </summary>
+        /// <param name="gameName">name of the user</param>
+        /// <returns>true: user was created</returns>
+        public bool CreatePlayer(string gameName);
+
+        /// <summary>
+        /// return the user with the maximum of population
+        /// </summary>
+        /// <returns>user with the maximum of pop</returns>
+        public AppUser GetUserMaxPop();
     }
 }
