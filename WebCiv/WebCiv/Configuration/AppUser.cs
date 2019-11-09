@@ -17,8 +17,7 @@ namespace WebCiv.Configuration
         /// <summary>
         /// name of the user
         /// </summary>
-        /// Index(IsUnique = true),
-        [Required, MaxLength(24),  Column(Order = 100)]
+        [Key, MaxLength(24), Column(Order = 100)]
         public string GameName { get; set; }
 
         /// <summary>

@@ -8,22 +8,15 @@ namespace EngineUnitTest
 {
     public class TestDALUsers
     {
-        [SetUp]
-        public void Setup()
-        {
-            IDatabaseInitializer<ApplicationDbContext> init = new DropCreateDatabaseAlways<ApplicationDbContext>();
-            Database.SetInitializer(init);
-            init.InitializeDatabase(new ApplicationDbContext());
-        }
 
         [Test]
         public void CreateNewUser()
         {
-            using (IDAL_User dal = new DAL_User())
+            using (IDAL_User dal = new DAL_User(true))
             {
                 var users = dal.GetAllUsers();
                 int OriginalCount = users.Count;
-                //Assert.IsTrue(dal.CreatePlayer("FirstUser", "password"));
+                Assert.IsTrue(dal.CreatePlayer("FirstUser"));
                 users = dal.GetAllUsers();
 
                 Assert.IsNotNull(users);
@@ -35,12 +28,12 @@ namespace EngineUnitTest
         [Test]
         public void CreateSameUser_CheckSecondWasnt()
         {
-            using (IDAL_User dal = new DAL_User())
+            using (IDAL_User dal = new DAL_User(true))
             {
                 var users = dal.GetAllUsers();
                 int OriginalCount = users.Count;
-                //Assert.IsTrue(dal.CreatePlayer("Double", "password"));
-                //Assert.IsFalse(dal.CreatePlayer("Double", "password"));
+                Assert.IsTrue(dal.CreatePlayer("Double"));
+                Assert.IsFalse(dal.CreatePlayer("Double"));
                 users = dal.GetAllUsers();
 
                 Assert.IsNotNull(users);

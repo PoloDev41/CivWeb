@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
@@ -16,6 +17,19 @@ namespace WebCiv.DAL
         /// context of the users
         /// </summary>
         private ApplicationDbContext BDD_user;
+
+        /// <summary>
+        /// Create a new DAL user, use to get information about the user
+        /// </summary>
+        /// <param name="isInMemory">true, an option will be set to run the DB into memory</param>
+        public DAL_User(bool isInMemory)
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: "Add_writes_to_database")
+                .Options;
+
+            this.BDD_user = new ApplicationDbContext(options);
+        }
 
         /// <summary>
         /// Create a new DAL user, use to get information about the user
@@ -63,6 +77,25 @@ namespace WebCiv.DAL
                     return false;
                 }
                 
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// create a player profil with no user (mainly for test purpose only)
+        /// </summary>
+        /// <param name="name">name of the user</param>
+        /// <returns>true: user was created</returns>
+        public bool CreatePlayer(string name)
+        {
+            try
+            {
+                BDD_user.Users.Add(new AppUser() { GameName = name });
+                this.BDD_user.SaveChanges();
             }
             catch (Exception)
             {
