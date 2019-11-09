@@ -11,6 +11,11 @@ namespace WebCiv.Engine
     public class Population
     {
         /// <summary>
+        /// Id of the population
+        /// </summary>
+        public int Id { get; set; }
+
+        /// <summary>
         /// number of total population
         /// </summary>
         public double TotalPop { get; set; }

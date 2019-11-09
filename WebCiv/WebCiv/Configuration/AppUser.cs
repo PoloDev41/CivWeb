@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -11,25 +12,14 @@ namespace WebCiv.Configuration
     /// <summary>
     /// handle all information about the user
     /// </summary>
-    public class User
+    public class AppUser : IdentityUser<int>
     {
-        /// <summary>
-        /// Id of the user
-        /// </summary>
-        [Key, Column(Order = 1)]
-        public int Id { get; set; }
-
         /// <summary>
         /// name of the user
         /// </summary>
-        [Required, MaxLength(24), Index(IsUnique = true), Column(Order = 100)]
-        public string Name { get; set; }
-
-        /// <summary>
-        /// password of the user
-        /// </summary>
-        [Required, MaxLength(200)]
-        public string Password { get; set; }
+        /// Index(IsUnique = true),
+        [Required, MaxLength(24),  Column(Order = 100)]
+        public string GameName { get; set; }
 
         /// <summary>
         /// civization of the user
