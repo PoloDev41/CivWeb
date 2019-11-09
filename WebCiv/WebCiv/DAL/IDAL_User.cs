@@ -21,7 +21,22 @@ namespace WebCiv.DAL
         /// create a new user
         /// </summary>
         /// <param name="name">name of the user</param>
+        /// <param name="password">password of the user</param>
         /// <returns>true: user was created</returns>
-        bool CreateUser(string name);
+        bool CreateUser(string name, string password);
+
+        /// <summary>
+        /// authentify a user
+        /// </summary>
+        /// <param name="name">name of the user</param>
+        /// <param name="password">password of the user</param>
+        /// <returns>authentified user</returns>
+        public User Authentify(string name, string password);
+
+        /// <summary>
+        /// return the user with the maximum of population
+        /// </summary>
+        /// <returns>user with the maximum of pop</returns>
+        public User GetUserMaxPop();
     }
 }

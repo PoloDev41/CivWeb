@@ -26,6 +26,12 @@ namespace WebCiv.Configuration
         public string Name { get; set; }
 
         /// <summary>
+        /// password of the user
+        /// </summary>
+        [Required, MaxLength(200)]
+        public string Password { get; set; }
+
+        /// <summary>
         /// civization of the user
         /// </summary>
         public Civilization UserCiv { get; set; }
