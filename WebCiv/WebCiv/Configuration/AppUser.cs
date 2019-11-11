@@ -18,11 +18,12 @@ namespace WebCiv.Configuration
         /// name of the user
         /// </summary>
         [MaxLength(24), Column(Order = 100)]
+        [Display(Name = "Civilization name")]
         public string GameName { get; set; }
 
         /// <summary>
         /// civization of the user
         /// </summary>
-        public Civilization UserCiv { get; set; }
+        public virtual Civilization UserCiv { get; set; }
     }
 }

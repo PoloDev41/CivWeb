@@ -18,5 +18,20 @@ namespace WebCiv.Engine
         /// Population of the civilization
         /// </summary>
         public Population Population { get; set; } = new Population();
+
+        /// <summary>
+        /// create a new civilization
+        /// </summary>
+        /// <returns>new civilization</returns>
+        public static Civilization CreateRawCivilization()
+        {
+            return new Civilization()
+            {
+                Population = new Population()
+                {
+                    TotalPop = 10
+                },
+            };
+        }
     }
 }
