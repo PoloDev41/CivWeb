@@ -72,6 +72,12 @@
             Create a new DAL user, use to get information about the user
             </summary>
         </member>
+        <member name="M:WebCiv.DAL.DAL_User.#ctor(WebCiv.DAL.ApplicationDbContext)">
+            <summary>
+            Create a new DAL user, use to get information
+            </summary>
+            <param name="context">DB context</param>
+        </member>
         <member name="M:WebCiv.DAL.DAL_User.Dispose">
             <summary>
             dispose
@@ -89,11 +95,18 @@
             </summary>
             <returns>list of users</returns>
         </member>
-        <member name="M:WebCiv.DAL.DAL_User.CreatePlayer(System.Int32,System.String)">
+        <member name="M:WebCiv.DAL.DAL_User.CreateCivilization(System.Int32,System.String)">
             <summary>
             create a new user
             </summary>
             <param name="gameName">name of the user</param>
+            <param name="userId">Id of the user</param>
+            <returns>true: user was created</returns>
+        </member>
+        <member name="M:WebCiv.DAL.DAL_User.CreateCivilization(System.Int32)">
+            <summary>
+            create a new civilization for a user which has already a name
+            </summary>
             <param name="userId">Id of the user</param>
             <returns>true: user was created</returns>
         </member>
@@ -110,6 +123,27 @@
             </summary>
             <returns>user with the maximum of pop</returns>
         </member>
+        <member name="M:WebCiv.DAL.DAL_User.GetUser(System.Int32)">
+            <summary>
+            return the user on the given Id
+            </summary>
+            <param name="id">id of the user</param>
+            <returns>user</returns>
+        </member>
+        <member name="M:WebCiv.DAL.DAL_User.GetUser(System.String)">
+            <summary>
+            return the user on the given Id
+            </summary>
+            <param name="id">id of the user</param>
+            <returns>user</returns>
+        </member>
+        <member name="M:WebCiv.DAL.DAL_User.LoadAllTech(System.Int32)">
+            <summary>
+            load all whole tech tree with the progression
+            </summary>
+            <param name="userId">Id of the user</param>
+            <returns>techno tree of the civ</returns>
+        </member>
         <member name="T:WebCiv.DAL.IDAL_User">
             <summary>
             interface to get information about user
@@ -121,17 +155,24 @@
             </summary>
             <returns>users</returns>
         </member>
-        <member name="M:WebCiv.DAL.IDAL_User.CreatePlayer(System.Int32,System.String)">
+        <member name="M:WebCiv.DAL.IDAL_User.CreateCivilization(System.Int32,System.String)">
             <summary>
-            create a player profil to a user
+            create a civilization for a user
             </summary>
             <param name="gameName">name of the user</param>
             <param name="userId">Id of the user</param>
             <returns>true: user was created</returns>
         </member>
+        <member name="M:WebCiv.DAL.IDAL_User.CreateCivilization(System.Int32)">
+            <summary>
+            create a new civilization for a user which has already a name
+            </summary>
+            <param name="userId">Id of the user</param>
+            <returns>true: user was created</returns>
+        </member>
         <member name="M:WebCiv.DAL.IDAL_User.CreatePlayer(System.String)">
             <summary>
-            create a player profil with no user (mainly for test purpose only)
+            create a player profil with no user and no civilization (mainly for test purpose only)
             </summary>
             <param name="gameName">name of the user</param>
             <returns>true: user was created</returns>
@@ -141,6 +182,34 @@
             return the user with the maximum of population
             </summary>
             <returns>user with the maximum of pop</returns>
+        </member>
+        <member name="M:WebCiv.DAL.IDAL_User.GetUser(System.Int32)">
+            <summary>
+            return the user on the given Id
+            </summary>
+            <param name="id">id of the user</param>
+            <returns>user</returns>
+        </member>
+        <member name="M:WebCiv.DAL.IDAL_User.GetUser(System.String)">
+            <summary>
+            return the user on the given Id
+            </summary>
+            <param name="id">id of the user</param>
+            <returns>user</returns>
+        </member>
+        <member name="M:WebCiv.DAL.IDAL_User.GetUserId(System.Security.Claims.ClaimsPrincipal)">
+            <summary>
+            return the ID of the user
+            </summary>
+            <param name="user">user</param>
+            <returns>id</returns>
+        </member>
+        <member name="M:WebCiv.DAL.IDAL_User.LoadAllTech(System.Int32)">
+            <summary>
+            load all whole tech tree with the progression
+            </summary>
+            <param name="userId">Id of the user</param>
+            <returns>techno tree of the civ</returns>
         </member>
         <member name="T:WebCiv.DAL.Password_handler">
             <summary>
@@ -192,6 +261,57 @@
             Population of the civilization
             </summary>
         </member>
+        <member name="P:WebCiv.Engine.Civilization.TechTree">
+            <summary>
+            technology tree of the civilization
+            </summary>
+        </member>
+        <member name="M:WebCiv.Engine.Civilization.CreateRawCivilization">
+            <summary>
+            create a new civilization
+            </summary>
+            <returns>new civilization</returns>
+        </member>
+        <member name="T:WebCiv.Engine.CivTech">
+            <summary>
+            class to store civilization technology progression
+            </summary>
+        </member>
+        <member name="P:WebCiv.Engine.CivTech.Id">
+            <summary>
+            id of the tech
+            </summary>
+        </member>
+        <member name="P:WebCiv.Engine.CivTech.TechnologyName">
+            <summary>
+            name of the technology
+            </summary>
+        </member>
+        <member name="P:WebCiv.Engine.CivTech.CurrentProgression">
+            <summary>
+            current progression on the tech
+            </summary>
+        </member>
+        <member name="P:WebCiv.Engine.CivTech.NextObjective">
+            <summary>
+            next objective of the tech to increase the level
+            </summary>
+        </member>
+        <member name="T:WebCiv.Engine.CivTechTree">
+            <summary>
+            class about the civilization technology tree
+            </summary>
+        </member>
+        <member name="P:WebCiv.Engine.CivTechTree.Id">
+            <summary>
+            id of the civ tech
+            </summary>
+        </member>
+        <member name="P:WebCiv.Engine.CivTechTree.TechnologyProgression">
+            <summary>
+            list of technology in progress
+            </summary>
+        </member>
         <member name="T:WebCiv.Engine.Population">
             <summary>
             Handle all information about population
@@ -206,6 +326,65 @@
             <summary>
             number of total population
             </summary>
+        </member>
+        <member name="T:WebCiv.Engine.TechnologyTree.BaseTechnology">
+            <summary>
+            abstract class of technology
+            </summary>
+        </member>
+        <member name="P:WebCiv.Engine.TechnologyTree.BaseTechnology.LinkedTechnology">
+            <summary>
+            linked technologies of this tech
+            </summary>
+        </member>
+        <member name="P:WebCiv.Engine.TechnologyTree.BaseTechnology.Name">
+            <summary>
+            name of the technology
+            </summary>
+        </member>
+        <member name="M:WebCiv.Engine.TechnologyTree.BaseTechnology.ApplyProgression(WebCiv.Engine.CivTechTree)">
+            <summary>
+            apply a progression on this technology
+            </summary>
+            <param name="civTree">tree of the civilization</param>
+        </member>
+        <member name="T:WebCiv.Engine.TechnologyTree.TechnoDiscovering">
+            <summary>
+            technology of discovering
+            </summary>
+        </member>
+        <member name="F:WebCiv.Engine.TechnologyTree.TechnoDiscovering.DiscoveringName">
+            <summary>
+            const name of the techno
+            </summary>
+        </member>
+        <member name="M:WebCiv.Engine.TechnologyTree.TechnoDiscovering.#ctor">
+            <summary>
+            create the technology discovering
+            </summary>
+        </member>
+        <member name="M:WebCiv.Engine.TechnologyTree.TechnoDiscovering.ApplyProgression(WebCiv.Engine.CivTechTree)">
+            <summary>
+            apply a progression on this technology
+            </summary>
+            <param name="civTree">tree of the civilization</param>
+        </member>
+        <member name="T:WebCiv.Engine.TechnologyTree.TechnoTree">
+            <summary>
+            represent the techno tree
+            </summary>
+        </member>
+        <member name="P:WebCiv.Engine.TechnologyTree.TechnoTree.Tree">
+            <summary>
+            tree of the technologies
+            </summary>
+        </member>
+        <member name="M:WebCiv.Engine.TechnologyTree.TechnoTree.ApplyProgression(System.String,WebCiv.Engine.CivTechTree)">
+            <summary>
+            apply the progression on a technology to a civilization
+            </summary>
+            <param name="technoName">name of the techno to progress on</param>
+            <param name="tree">civilization techo tree</param>
         </member>
         <member name="T:WebCiv.Pages.IndexModel">
             <summary>

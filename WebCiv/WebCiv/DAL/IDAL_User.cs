@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using WebCiv.Configuration;
+using WebCiv.Engine;
 
 namespace WebCiv.DAL
 {
@@ -69,5 +70,12 @@ namespace WebCiv.DAL
         {
             return int.Parse(user.FindFirst(ClaimTypes.NameIdentifier).Value);
         }
+
+        /// <summary>
+        /// load all whole tech tree with the progression
+        /// </summary>
+        /// <param name="userId">Id of the user</param>
+        /// <returns>techno tree of the civ</returns>
+        public CivTechTree LoadAllTech(int userId);
     }
 }

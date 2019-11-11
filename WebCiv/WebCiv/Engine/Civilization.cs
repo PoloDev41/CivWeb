@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using WebCiv.Engine.TechnologyTree;
 
 namespace WebCiv.Engine
 {
@@ -20,6 +21,11 @@ namespace WebCiv.Engine
         public Population Population { get; set; } = new Population();
 
         /// <summary>
+        /// technology tree of the civilization
+        /// </summary>
+        public CivTechTree TechTree { get; set; }
+
+        /// <summary>
         /// create a new civilization
         /// </summary>
         /// <returns>new civilization</returns>
@@ -31,6 +37,13 @@ namespace WebCiv.Engine
                 {
                     TotalPop = 10
                 },
+                TechTree = new CivTechTree()
+                {
+                    TechnologyProgression = new List<CivTech>()
+                    {
+                        new CivTech(){TechnologyName = TechnoDiscovering.DiscoveringName}
+                    }
+                }
             };
         }
     }
