@@ -13,6 +13,8 @@ using WebCiv.Configuration;
 namespace WebCiv.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
+#pragma warning disable CS1591 // Commentaire XML manquant pour le type ou le membre visible publiquement
+#pragma warning disable CA2007 // Consider calling ConfigureAwait on the awaited task
     public class ConfirmEmailModel : PageModel
     {
         private readonly UserManager<AppUser> _userManager;
@@ -44,4 +46,7 @@ namespace WebCiv.Areas.Identity.Pages.Account
             return Page();
         }
     }
+
+#pragma warning restore CS1591 // Commentaire XML manquant pour le type ou le membre visible publiquement
+#pragma warning restore CA2007 // Consider calling ConfigureAwait on the awaited task
 }

@@ -1,0 +1,255 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebCiv</name>
+    </assembly>
+    <members>
+        <member name="T:WebCiv.Areas.Identity.IdentityHostingStartup">
+            <summary>
+            class for Identity hosting startup
+            </summary>
+        </member>
+        <member name="M:WebCiv.Areas.Identity.IdentityHostingStartup.Configure(Microsoft.AspNetCore.Hosting.IWebHostBuilder)">
+            <summary>
+            constructor of Identity hosting startup
+            </summary>
+            <param name="builder">builder</param>
+        </member>
+        <member name="T:WebCiv.Configuration.AppRole">
+            <summary>
+            Role use in Identity library
+            </summary>
+        </member>
+        <member name="T:WebCiv.Configuration.AppUser">
+            <summary>
+            handle all information about the user
+            </summary>
+        </member>
+        <member name="P:WebCiv.Configuration.AppUser.GameName">
+            <summary>
+            name of the user
+            </summary>
+        </member>
+        <member name="P:WebCiv.Configuration.AppUser.UserCiv">
+            <summary>
+            civization of the user
+            </summary>
+        </member>
+        <member name="T:WebCiv.DAL.ApplicationDbContext">
+            <summary>
+            context about the user
+            </summary>
+        </member>
+        <member name="M:WebCiv.DAL.ApplicationDbContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{WebCiv.DAL.ApplicationDbContext})">
+            <summary>
+            Create a new application DbContext with options
+            </summary>
+            <param name="options">options</param>
+        </member>
+        <member name="M:WebCiv.DAL.ApplicationDbContext.#ctor">
+            <summary>
+            Create a new applciation DB context
+            </summary>
+        </member>
+        <member name="T:WebCiv.DAL.DAL_User">
+            <summary>
+            DAL about user
+            </summary>
+        </member>
+        <member name="F:WebCiv.DAL.DAL_User.BDD_user">
+            <summary>
+            context of the users
+            </summary>
+        </member>
+        <member name="M:WebCiv.DAL.DAL_User.#ctor(System.Boolean)">
+            <summary>
+            Create a new DAL user, use to get information about the user
+            </summary>
+            <param name="isInMemory">true, an option will be set to run the DB into memory</param>
+        </member>
+        <member name="M:WebCiv.DAL.DAL_User.#ctor">
+            <summary>
+            Create a new DAL user, use to get information about the user
+            </summary>
+        </member>
+        <member name="M:WebCiv.DAL.DAL_User.Dispose">
+            <summary>
+            dispose
+            </summary>
+        </member>
+        <member name="M:WebCiv.DAL.DAL_User.Dispose(System.Boolean)">
+            <summary>
+            dispose ressource
+            </summary>
+            <param name="disposing">isDisposing</param>
+        </member>
+        <member name="M:WebCiv.DAL.DAL_User.GetAllUsers">
+            <summary>
+            return the list of all users
+            </summary>
+            <returns>list of users</returns>
+        </member>
+        <member name="M:WebCiv.DAL.DAL_User.CreatePlayer(System.Int32,System.String)">
+            <summary>
+            create a new user
+            </summary>
+            <param name="gameName">name of the user</param>
+            <param name="userId">Id of the user</param>
+            <returns>true: user was created</returns>
+        </member>
+        <member name="M:WebCiv.DAL.DAL_User.CreatePlayer(System.String)">
+            <summary>
+            create a player profil with no user (mainly for test purpose only)
+            </summary>
+            <param name="gameName">name of the user</param>
+            <returns>true: user was created</returns>
+        </member>
+        <member name="M:WebCiv.DAL.DAL_User.GetUserMaxPop">
+            <summary>
+            return the user with the maximum of population
+            </summary>
+            <returns>user with the maximum of pop</returns>
+        </member>
+        <member name="T:WebCiv.DAL.IDAL_User">
+            <summary>
+            interface to get information about user
+            </summary>
+        </member>
+        <member name="M:WebCiv.DAL.IDAL_User.GetAllUsers">
+            <summary>
+            get all user
+            </summary>
+            <returns>users</returns>
+        </member>
+        <member name="M:WebCiv.DAL.IDAL_User.CreatePlayer(System.Int32,System.String)">
+            <summary>
+            create a player profil to a user
+            </summary>
+            <param name="gameName">name of the user</param>
+            <param name="userId">Id of the user</param>
+            <returns>true: user was created</returns>
+        </member>
+        <member name="M:WebCiv.DAL.IDAL_User.CreatePlayer(System.String)">
+            <summary>
+            create a player profil with no user (mainly for test purpose only)
+            </summary>
+            <param name="gameName">name of the user</param>
+            <returns>true: user was created</returns>
+        </member>
+        <member name="M:WebCiv.DAL.IDAL_User.GetUserMaxPop">
+            <summary>
+            return the user with the maximum of population
+            </summary>
+            <returns>user with the maximum of pop</returns>
+        </member>
+        <member name="T:WebCiv.DAL.Password_handler">
+            <summary>
+            class to handle password generation
+            </summary>
+        </member>
+        <member name="F:WebCiv.DAL.Password_handler.passwordIteration">
+            <summary>
+            number of iteration
+            </summary>
+        </member>
+        <member name="F:WebCiv.DAL.Password_handler.keySize">
+            <summary>
+            key size
+            </summary>
+        </member>
+        <member name="F:WebCiv.DAL.Password_handler.saltSize">
+            <summary>
+            size of the salt
+            </summary>
+        </member>
+        <member name="M:WebCiv.DAL.Password_handler.Hash(System.String)">
+            <summary>
+            crypte the password
+            </summary>
+            <param name="password">password to crypt</param>
+            <returns>crypted password</returns>
+        </member>
+        <member name="M:WebCiv.DAL.Password_handler.Check(System.String,System.String)">
+            <summary>
+            check if a crypted password is the same than a uncrypted password
+            </summary>
+            <param name="hash">crypted</param>
+            <param name="password">uncrypted</param>
+            <returns>true: passwords are the same</returns>
+        </member>
+        <member name="T:WebCiv.Engine.Civilization">
+            <summary>
+            class to store civilization information
+            </summary>
+        </member>
+        <member name="P:WebCiv.Engine.Civilization.Id">
+            <summary>
+            Id of the civilization
+            </summary>
+        </member>
+        <member name="P:WebCiv.Engine.Civilization.Population">
+            <summary>
+            Population of the civilization
+            </summary>
+        </member>
+        <member name="T:WebCiv.Engine.Population">
+            <summary>
+            Handle all information about population
+            </summary>
+        </member>
+        <member name="P:WebCiv.Engine.Population.Id">
+            <summary>
+            Id of the population
+            </summary>
+        </member>
+        <member name="P:WebCiv.Engine.Population.TotalPop">
+            <summary>
+            number of total population
+            </summary>
+        </member>
+        <member name="T:WebCiv.Pages.IndexModel">
+            <summary>
+            class model for index page
+            </summary>
+        </member>
+        <member name="F:WebCiv.Pages.IndexModel.user">
+            <summary>
+            user
+            </summary>
+        </member>
+        <member name="F:WebCiv.Pages.IndexModel._logger">
+            <summary>
+            used logger
+            </summary>
+        </member>
+        <member name="M:WebCiv.Pages.IndexModel.#ctor(Microsoft.Extensions.Logging.ILogger{WebCiv.Pages.IndexModel})">
+            <summary>
+            create a new index model
+            </summary>
+            <param name="logger">logger</param>
+        </member>
+        <member name="M:WebCiv.Pages.IndexModel.OnGet">
+            <summary>
+            OnGet
+            </summary>
+        </member>
+        <member name="T:WebCiv.Program">
+            <summary>
+            main class
+            </summary>
+        </member>
+        <member name="M:WebCiv.Program.Main(System.String[])">
+            <summary>
+            main program
+            </summary>
+            <param name="args">args</param>
+        </member>
+        <member name="M:WebCiv.Program.CreateHostBuilder(System.String[])">
+            <summary>
+            create host
+            </summary>
+            <param name="args">arg</param>
+            <returns>hostbuilder</returns>
+        </member>
+    </members>
+</doc>
