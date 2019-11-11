@@ -1,0 +1,37 @@
+﻿@page
+@model WebCiv.Pages.CivilizationModel
+
+
+<hr />
+@if (String.IsNullOrEmpty(Model.AppUser.GameName))
+{
+    <h4>Create your civilization</h4>
+    <p>
+        Your civilization has no name, give it one.
+    </p>
+    using (Html.BeginForm())
+    {
+        <div>
+            @Html.LabelFor(m => m.AppUser.GameName)
+            @Html.TextBoxFor(m => m.AppUser.GameName)
+            <span style="color:red">@ViewData["MessageError"]</span>
+            @Html.ValidationMessageFor(m => m.AppUser.GameName)
+        </div>
+        <input type="submit" value="Create civilization" />
+        <br />
+    }
+}
+else
+{
+    <h4>@Model.AppUser.GameName</h4>
+    <div class="container">
+        <main role="main" class="pb-3">
+            <partial name="_CivInformation" , model="Model.AppUser" />
+        </main>
+    </div>
+}
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

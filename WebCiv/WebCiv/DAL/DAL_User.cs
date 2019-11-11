@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using WebCiv.Configuration;
+using WebCiv.Engine;
 
 namespace WebCiv.DAL
 {
@@ -40,6 +41,15 @@ namespace WebCiv.DAL
         }
 
         /// <summary>
+        /// Create a new DAL user, use to get information
+        /// </summary>
+        /// <param name="context">DB context</param>
+        public DAL_User(ApplicationDbContext context)
+        {
+            this.BDD_user = context;
+        }
+
+        /// <summary>
         /// dispose
         /// </summary>
         public void Dispose()
@@ -62,7 +72,7 @@ namespace WebCiv.DAL
         /// <param name="gameName">name of the user</param>
         /// <param name="password">password of the user</param>
         /// <returns>true: user was created</returns>
-        public bool CreatePlayer(int userId, string gameName)
+        public bool CreateCivilization(int userId, string gameName)
         {
             try
             {
@@ -73,6 +83,7 @@ namespace WebCiv.DAL
                     if(inBdd == null)
                     {
                         user.GameName = gameName;
+                        user.UserCiv = Civilization.CreateRawCivilization();
                         this.BDD_user.SaveChanges();
                     }
                 }
@@ -81,6 +92,33 @@ namespace WebCiv.DAL
                     return false;
                 }
                 
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// create a new civilization for a user which has already a name
+        /// </summary>
+        /// <param name="userId">Id of the user</param>
+        /// <returns>true: user was created</returns>
+        public bool CreateCivilization(int userId)
+        {
+            try
+            {
+                var user = BDD_user.Users.FirstOrDefault(u => u.Id == userId);
+                if (user != null)
+                {
+                    user.UserCiv = Civilization.CreateRawCivilization();
+                    this.BDD_user.SaveChanges();
+                }
+                else
+                {
+                    return false;
+                }
             }
             catch (Exception)
             {
@@ -122,6 +160,34 @@ namespace WebCiv.DAL
             return this.BDD_user.Users
                 .Where(x => x.UserCiv.Population.TotalPop != 0 &&
                         x.UserCiv.Population.TotalPop == BDD_user.Users.Max(p => p.UserCiv.Population.TotalPop)).SingleOrDefault();
+        }
+
+        /// <summary>
+        /// return the user on the given Id
+        /// </summary>
+        /// <param name="id">id of the user</param>
+        /// <returns>user</returns>
+        public AppUser GetUser(int id)
+        {
+            return this.BDD_user.Users
+               .Where(x => x.Id == id)
+               .Include(x => x.UserCiv)
+               .ThenInclude(x => x.Population)
+               .SingleOrDefault();
+        }
+
+        /// <summary>
+        /// return the user on the given Id
+        /// </summary>
+        /// <param name="id">id of the user</param>
+        /// <returns>user</returns>
+        public AppUser GetUser(string id)
+        {
+            if(int.TryParse(id, out int result))
+            {
+                return GetUser(result);
+            }
+            return null;
         }
     }
 }
