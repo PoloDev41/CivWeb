@@ -14,6 +14,7 @@ using WebCiv.Configuration;
 namespace WebCiv.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
+#pragma warning disable CS1591 // Commentaire XML manquant pour le type ou le membre visible publiquement
     public class ResetPasswordModel : PageModel
     {
         private readonly UserManager<AppUser> _userManager;
@@ -26,6 +27,7 @@ namespace WebCiv.Areas.Identity.Pages.Account
         [BindProperty]
         public InputModel Input { get; set; }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1034:Nested types should not be visible", Justification = "auto code")]
         public class InputModel
         {
             [Required]
@@ -88,4 +90,5 @@ namespace WebCiv.Areas.Identity.Pages.Account
             return Page();
         }
     }
+#pragma warning restore CS1591 // Commentaire XML manquant pour le type ou le membre visible publiquement
 }

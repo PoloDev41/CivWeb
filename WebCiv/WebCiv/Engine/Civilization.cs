@@ -4,6 +4,9 @@ using System.Text;
 
 namespace WebCiv.Engine
 {
+    /// <summary>
+    /// class to store civilization information
+    /// </summary>
     public class Civilization
     {
         /// <summary>

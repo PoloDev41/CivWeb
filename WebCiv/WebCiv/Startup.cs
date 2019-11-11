@@ -16,6 +16,7 @@ using WebCiv.DAL;
 
 namespace WebCiv
 {
+#pragma warning disable CS1591 // Commentaire XML manquant pour le type ou le membre visible publiquement
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -48,7 +49,9 @@ namespace WebCiv
             services.AddRazorPages();
         }
 
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "auto code")]
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -77,4 +80,5 @@ namespace WebCiv
             });
         }
     }
+#pragma warning restore CS1591 // Commentaire XML manquant pour le type ou le membre visible publiquement
 }

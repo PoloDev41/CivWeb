@@ -12,6 +12,7 @@ using WebCiv.Configuration;
 namespace WebCiv.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
+#pragma warning disable CS1591 // Commentaire XML manquant pour le type ou le membre visible publiquement
     public class LogoutModel : PageModel
     {
         private readonly SignInManager<AppUser> _signInManager;
@@ -23,6 +24,7 @@ namespace WebCiv.Areas.Identity.Pages.Account
             _logger = logger;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "Auto code")]
         public void OnGet()
         {
         }
@@ -41,4 +43,5 @@ namespace WebCiv.Areas.Identity.Pages.Account
             }
         }
     }
+#pragma warning restore CS1591 // Commentaire XML manquant pour le type ou le membre visible publiquement
 }

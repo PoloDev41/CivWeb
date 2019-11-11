@@ -24,11 +24,17 @@ namespace WebCiv.DAL
         /// <param name="isInMemory">true, an option will be set to run the DB into memory</param>
         public DAL_User(bool isInMemory)
         {
-            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: "Add_writes_to_database")
-                .Options;
-
-            this.BDD_user = new ApplicationDbContext(options);
+            if(isInMemory)
+            {
+                var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+               .UseInMemoryDatabase(databaseName: "Add_writes_to_database")
+               .Options;
+               this.BDD_user = new ApplicationDbContext(options);
+            }
+            else
+            {
+                this.BDD_user = new ApplicationDbContext();
+            }
         }
 
         /// <summary>
@@ -44,7 +50,20 @@ namespace WebCiv.DAL
         /// </summary>
         public void Dispose()
         {
-            this.BDD_user.Dispose();
+            Dispose(true);
+            GC.SuppressFinalize(this);
+            
+        }
+        /// <summary>
+        /// dispose ressource
+        /// </summary>
+        /// <param name="disposing">isDisposing</param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                this.BDD_user?.Dispose();
+            }
         }
 
         /// <summary>
@@ -60,7 +79,7 @@ namespace WebCiv.DAL
         /// create a new user
         /// </summary>
         /// <param name="gameName">name of the user</param>
-        /// <param name="password">password of the user</param>
+        /// <param name="userId">Id of the user</param>
         /// <returns>true: user was created</returns>
         public bool CreatePlayer(int userId, string gameName)
         {
@@ -82,7 +101,7 @@ namespace WebCiv.DAL
                 }
                 
             }
-            catch (Exception)
+            catch (ArgumentNullException)
             {
                 return false;
             }
@@ -92,7 +111,7 @@ namespace WebCiv.DAL
         /// <summary>
         /// create a player profil with no user (mainly for test purpose only)
         /// </summary>
-        /// <param name="name">name of the user</param>
+        /// <param name="gameName">name of the user</param>
         /// <returns>true: user was created</returns>
         public bool CreatePlayer(string gameName)
         {
@@ -106,7 +125,7 @@ namespace WebCiv.DAL
                     return true;
                 }
             }
-            catch (Exception)
+            catch (ArgumentNullException)
             {
                 return false;
             }

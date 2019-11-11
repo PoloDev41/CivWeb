@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace WebCiv.Pages
 {
+#pragma warning disable CS1591 // Commentaire XML manquant pour le type ou le membre visible publiquement
     public class PrivacyModel : PageModel
     {
         private readonly ILogger<PrivacyModel> _logger;
@@ -17,8 +18,10 @@ namespace WebCiv.Pages
             _logger = logger;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "auto code")]
         public void OnGet()
         {
         }
     }
+#pragma warning restore CS1591 // Commentaire XML manquant pour le type ou le membre visible publiquement
 }

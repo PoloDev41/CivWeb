@@ -18,6 +18,7 @@ using WebCiv.Configuration;
 namespace WebCiv.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
+#pragma warning disable CS1591 // Commentaire XML manquant pour le type ou le membre visible publiquement
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<AppUser> _signInManager;
@@ -40,8 +41,12 @@ namespace WebCiv.Areas.Identity.Pages.Account
         [BindProperty]
         public InputModel Input { get; set; }
 
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1056:Uri properties should not be strings", Justification = "auto code")]
         public string ReturnUrl { get; set; }
 
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2227:Collection properties should be read only", Justification = "auto code")]
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
         public class InputModel
@@ -112,4 +117,5 @@ namespace WebCiv.Areas.Identity.Pages.Account
             return Page();
         }
     }
+#pragma warning restore CS1591 // Commentaire XML manquant pour le type ou le membre visible publiquement
 }

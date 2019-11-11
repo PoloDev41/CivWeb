@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace WebCiv.Areas
 {
+#pragma warning disable CS1591 // Commentaire XML manquant pour le type ou le membre visible publiquement
     public interface IEmailSender
     {
         Task SendEmailAsync(string email, string subject, string message);
@@ -29,4 +30,5 @@ namespace WebCiv.Areas
             return Task.FromResult(0);
         }
     }
+#pragma warning restore CS1591 // Commentaire XML manquant pour le type ou le membre visible publiquement
 }

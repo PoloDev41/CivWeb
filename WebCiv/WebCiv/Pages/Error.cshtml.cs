@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 namespace WebCiv.Pages
 {
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+#pragma warning disable CS1591 // Commentaire XML manquant pour le type ou le membre visible publiquement
     public class ErrorModel : PageModel
     {
         public string RequestId { get; set; }
@@ -28,4 +29,5 @@ namespace WebCiv.Pages
             RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
         }
     }
+#pragma warning restore CS1591 // Commentaire XML manquant pour le type ou le membre visible publiquement
 }

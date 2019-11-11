@@ -16,6 +16,7 @@ using WebCiv.Configuration;
 namespace WebCiv.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
+#pragma warning disable CS1591 // Commentaire XML manquant pour le type ou le membre visible publiquement
     public class LoginModel : PageModel
     {
         private readonly UserManager<AppUser> _userManager;
@@ -138,4 +139,5 @@ namespace WebCiv.Areas.Identity.Pages.Account
             return Page();
         }
     }
+#pragma warning restore CS1591 // Commentaire XML manquant pour le type ou le membre visible publiquement
 }
