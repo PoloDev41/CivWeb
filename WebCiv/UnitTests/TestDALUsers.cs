@@ -9,11 +9,16 @@ namespace EngineUnitTest
 {
     public class TestDALUsers
     {
+        [SetUp]
+        public void Setup()
+        {
+            ApplicationDbContext.IsRunningOnMemory = true;
+        }
 
         [Test]
         public void CreateNewUser()
         {
-            using (IDAL_User dal = new DAL_User(true))
+            using (IDAL_User dal = new DAL_User())
             {
                 var users = dal.GetAllUsers();
                 int OriginalCount = users.Count;
@@ -29,7 +34,7 @@ namespace EngineUnitTest
         [Test]
         public void CreateSameUser_CheckSecondWasnt()
         {
-            using (IDAL_User dal = new DAL_User(true))
+            using (IDAL_User dal = new DAL_User())
             {
                 var users = dal.GetAllUsers();
                 int OriginalCount = users.Count;
@@ -46,7 +51,7 @@ namespace EngineUnitTest
         [Test]
         public void CreateCivilization()
         {
-            using (IDAL_User dal = new DAL_User(true))
+            using (IDAL_User dal = new DAL_User())
             {
                 Assert.IsTrue(dal.CreatePlayer("NewUserWithCiv"));
                 var users = dal.GetAllUsers();
