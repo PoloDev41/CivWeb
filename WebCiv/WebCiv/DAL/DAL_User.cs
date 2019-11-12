@@ -208,5 +208,20 @@ namespace WebCiv.DAL
             }
             return null;
         }
+
+        /// <summary>
+        /// load all whole tech tree with the progression
+        /// </summary>
+        /// <param name="userId">Id of the user</param>
+        /// <returns>techno tree of the civ</returns>
+        public CivTechTree LoadAllTech(int userId)
+        {
+            var user = this.BDD_user.Users
+                .Where(x => x.Id == userId)
+                .Include(x => x.UserCiv.TechTree)
+                .ThenInclude(x => x.TechnologyProgression).SingleOrDefault();
+
+            return user.UserCiv.TechTree;
+        }
     }
 }
