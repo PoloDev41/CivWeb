@@ -78,9 +78,9 @@ namespace WebCiv.DAL
         /// <param name="amount">amount to add</param>
         public void IncreasePopulation(Civilization civ, int amount)
         {
-            if(civ?.Population?.TotalPop == null)
+            if(civ == null)
             {
-                return;
+                throw new ArgumentNullException(nameof(civ));
             }
 
             civ.Population.TotalPop += amount;

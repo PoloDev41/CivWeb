@@ -130,7 +130,7 @@ namespace WebCiv.DAL
                     return false;
                 }
             }
-            catch (Exception)
+            catch (ArgumentNullException)
             {
                 return false;
             }

@@ -29,7 +29,7 @@ namespace WebCiv.Engine
         /// <summary>
         /// list of population action that the civilization can do
         /// </summary>
-        public List<string> AllowedPopAction { get; private set; }
+        public List<CivAllowedPopAction> AllowedPopActions { get; private set; }
 
         /// <summary>
         /// current population action that the civilization does
@@ -55,9 +55,9 @@ namespace WebCiv.Engine
                         new CivTech() { TechnologyName = TechnoDiscovering.DiscoveringName }
                     }
                 },
-                AllowedPopAction = new List<string>()
+                AllowedPopActions = new List<CivAllowedPopAction>()
                 {
-                    PopActionReproduce.Name
+                    new CivAllowedPopAction(){PopActionName= PopActionReproduce.Name }
                 },
                 CurrentPopAction = null,
             };

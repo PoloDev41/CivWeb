@@ -14,16 +14,25 @@ using WebCiv.Engine;
 
 namespace WebCiv.Pages
 {
+    /// <summary>
+    /// model of the civilization view
+    /// </summary>
     [Authorize]
     public class CivilizationModel : PageModel
     {
         private readonly WebCiv.DAL.ApplicationDbContext _context;
-
+        /// <summary>
+        /// create a new civilization model
+        /// </summary>
+        /// <param name="context">Db context</param>
         public CivilizationModel(WebCiv.DAL.ApplicationDbContext context)
         {
             _context = context;
         }
-
+        /// <summary>
+        /// On get
+        /// </summary>
+        /// <returns>action result</returns>
         public IActionResult OnGet()
         {
             using (var dal = new DAL_User(_context))
@@ -35,11 +44,18 @@ namespace WebCiv.Pages
             return Page();
         }
 
+        /// <summary>
+        /// Current user
+        /// </summary>
         [BindProperty]
         public AppUser AppUser { get; set; }
 
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
+        /// <summary>
+        /// On post Async
+        /// </summary>
+        /// <returns>action result</returns>
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)

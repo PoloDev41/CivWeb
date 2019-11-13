@@ -18,6 +18,6 @@ namespace WebCiv.Engine
         /// <summary>
         /// list of technology in progress
         /// </summary>
-        public List<CivTech> TechnologyProgression { get; set; }
+        public List<CivTech> TechnologyProgression { get; set; } = new List<CivTech>();
     }
 }

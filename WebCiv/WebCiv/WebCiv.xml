@@ -309,6 +309,41 @@
             <param name="password">uncrypted</param>
             <returns>true: passwords are the same</returns>
         </member>
+        <member name="T:WebCiv.Engine.CivCurrentPopAction">
+            <summary>
+            class to know which population action is running
+            </summary>
+        </member>
+        <member name="P:WebCiv.Engine.CivCurrentPopAction.Id">
+            <summary>
+            id
+            </summary>
+        </member>
+        <member name="P:WebCiv.Engine.CivCurrentPopAction.PopActionName">
+            <summary>
+            name of the population action
+            </summary>
+        </member>
+        <member name="P:WebCiv.Engine.CivCurrentPopAction.DateToExecute">
+            <summary>
+            date when to execute the population action
+            </summary>
+        </member>
+        <member name="T:WebCiv.Engine.CivAllowedPopAction">
+            <summary>
+            class to store the allowed population action by the civilization
+            </summary>
+        </member>
+        <member name="P:WebCiv.Engine.CivAllowedPopAction.Id">
+            <summary>
+            Id of the allowed pop action
+            </summary>
+        </member>
+        <member name="P:WebCiv.Engine.CivAllowedPopAction.PopActionName">
+            <summary>
+            name of the population action
+            </summary>
+        </member>
         <member name="T:WebCiv.Engine.Civilization">
             <summary>
             class to store civilization information
@@ -327,6 +362,16 @@
         <member name="P:WebCiv.Engine.Civilization.TechTree">
             <summary>
             technology tree of the civilization
+            </summary>
+        </member>
+        <member name="P:WebCiv.Engine.Civilization.AllowedPopActions">
+            <summary>
+            list of population action that the civilization can do
+            </summary>
+        </member>
+        <member name="P:WebCiv.Engine.Civilization.CurrentPopAction">
+            <summary>
+            current population action that the civilization does
             </summary>
         </member>
         <member name="M:WebCiv.Engine.Civilization.CreateRawCivilization">
@@ -406,6 +451,11 @@
         <member name="T:WebCiv.Engine.PopAction.PopActionReproduce">
             <summary>
             class action to repop the population
+            </summary>
+        </member>
+        <member name="F:WebCiv.Engine.PopAction.PopActionReproduce.Name">
+            <summary>
+            name of the population action
             </summary>
         </member>
         <member name="M:WebCiv.Engine.PopAction.PopActionReproduce.#ctor">

@@ -39,7 +39,7 @@ namespace UnitTests
         public void TestActionCiv()
         {
             var user = Factory_Player.CreateNewPlayer("PLayerTestPopAction");
-            Assert.IsTrue(user.UserCiv.AllowedPopAction.Count > 0);
+            Assert.IsTrue(user.UserCiv.AllowedPopActions.Count > 0);
             Assert.IsNull(user.UserCiv.CurrentPopAction);
 
 
