@@ -40,6 +40,16 @@
             context about the user
             </summary>
         </member>
+        <member name="F:WebCiv.DAL.ApplicationDbContext.IsRunningOnMemory">
+            <summary>
+            if you set this variable to "true", mean, all instance should be running in memory
+            </summary>
+        </member>
+        <member name="P:WebCiv.DAL.ApplicationDbContext.Civilizations">
+            <summary>
+            set of the civilizations
+            </summary>
+        </member>
         <member name="M:WebCiv.DAL.ApplicationDbContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{WebCiv.DAL.ApplicationDbContext})">
             <summary>
             Create a new application DbContext with options
@@ -51,6 +61,46 @@
             Create a new applciation DB context
             </summary>
         </member>
+        <member name="T:WebCiv.DAL.DAL_Civ">
+            <summary>
+            class to get civilization information
+            </summary>
+        </member>
+        <member name="F:WebCiv.DAL.DAL_Civ.BDContext">
+            <summary>
+            context of the civilization
+            </summary>
+        </member>
+        <member name="M:WebCiv.DAL.DAL_Civ.#ctor">
+            <summary>
+            Create a new DAL civilization, use to get information about the user
+            </summary>
+        </member>
+        <member name="M:WebCiv.DAL.DAL_Civ.Dispose">
+            <summary>
+            dispose
+            </summary>
+        </member>
+        <member name="M:WebCiv.DAL.DAL_Civ.Dispose(System.Boolean)">
+            <summary>
+            dispose ressource
+            </summary>
+            <param name="disposing">isDisposing</param>
+        </member>
+        <member name="M:WebCiv.DAL.DAL_Civ.GetCivilizationAndPopulation(System.Int32)">
+            <summary>
+            return the civilization from the id
+            </summary>
+            <param name="civId">civ id</param>
+            <returns>civilization</returns>
+        </member>
+        <member name="M:WebCiv.DAL.DAL_Civ.IncreasePopulation(WebCiv.Engine.Civilization,System.Int32)">
+            <summary>
+            increase the population
+            </summary>
+            <param name="civ">civilization to update</param>
+            <param name="amount">amount to add</param>
+        </member>
         <member name="T:WebCiv.DAL.DAL_User">
             <summary>
             DAL about user
@@ -60,12 +110,6 @@
             <summary>
             context of the users
             </summary>
-        </member>
-        <member name="M:WebCiv.DAL.DAL_User.#ctor(System.Boolean)">
-            <summary>
-            Create a new DAL user, use to get information about the user
-            </summary>
-            <param name="isInMemory">true, an option will be set to run the DB into memory</param>
         </member>
         <member name="M:WebCiv.DAL.DAL_User.#ctor">
             <summary>
@@ -143,6 +187,25 @@
             </summary>
             <param name="userId">Id of the user</param>
             <returns>techno tree of the civ</returns>
+        </member>
+        <member name="T:WebCiv.DAL.IDAL_Civ">
+            <summary>
+            interface of the civilizations
+            </summary>
+        </member>
+        <member name="M:WebCiv.DAL.IDAL_Civ.GetCivilizationAndPopulation(System.Int32)">
+            <summary>
+            return the civilization from the id
+            </summary>
+            <param name="civId">civ id</param>
+            <returns>civilization</returns>
+        </member>
+        <member name="M:WebCiv.DAL.IDAL_Civ.IncreasePopulation(WebCiv.Engine.Civilization,System.Int32)">
+            <summary>
+            increase the population
+            </summary>
+            <param name="civ">civilization to update</param>
+            <param name="amount">amount to add</param>
         </member>
         <member name="T:WebCiv.DAL.IDAL_User">
             <summary>
@@ -246,6 +309,41 @@
             <param name="password">uncrypted</param>
             <returns>true: passwords are the same</returns>
         </member>
+        <member name="T:WebCiv.Engine.CivCurrentPopAction">
+            <summary>
+            class to know which population action is running
+            </summary>
+        </member>
+        <member name="P:WebCiv.Engine.CivCurrentPopAction.Id">
+            <summary>
+            id
+            </summary>
+        </member>
+        <member name="P:WebCiv.Engine.CivCurrentPopAction.PopActionName">
+            <summary>
+            name of the population action
+            </summary>
+        </member>
+        <member name="P:WebCiv.Engine.CivCurrentPopAction.DateToExecute">
+            <summary>
+            date when to execute the population action
+            </summary>
+        </member>
+        <member name="T:WebCiv.Engine.CivAllowedPopAction">
+            <summary>
+            class to store the allowed population action by the civilization
+            </summary>
+        </member>
+        <member name="P:WebCiv.Engine.CivAllowedPopAction.Id">
+            <summary>
+            Id of the allowed pop action
+            </summary>
+        </member>
+        <member name="P:WebCiv.Engine.CivAllowedPopAction.PopActionName">
+            <summary>
+            name of the population action
+            </summary>
+        </member>
         <member name="T:WebCiv.Engine.Civilization">
             <summary>
             class to store civilization information
@@ -264,6 +362,16 @@
         <member name="P:WebCiv.Engine.Civilization.TechTree">
             <summary>
             technology tree of the civilization
+            </summary>
+        </member>
+        <member name="P:WebCiv.Engine.Civilization.AllowedPopActions">
+            <summary>
+            list of population action that the civilization can do
+            </summary>
+        </member>
+        <member name="P:WebCiv.Engine.Civilization.CurrentPopAction">
+            <summary>
+            current population action that the civilization does
             </summary>
         </member>
         <member name="M:WebCiv.Engine.Civilization.CreateRawCivilization">
@@ -311,6 +419,62 @@
             <summary>
             list of technology in progress
             </summary>
+        </member>
+        <member name="T:WebCiv.Engine.PopAction.BasePopAction">
+            <summary>
+            abstract class for action on population
+            </summary>
+        </member>
+        <member name="P:WebCiv.Engine.PopAction.BasePopAction.ActionName">
+            <summary>
+            name of the action
+            </summary>
+        </member>
+        <member name="P:WebCiv.Engine.PopAction.BasePopAction.Description">
+            <summary>
+            description of the action
+            </summary>
+        </member>
+        <member name="M:WebCiv.Engine.PopAction.BasePopAction.GetDelay(System.Int32)">
+            <summary>
+            get the delay to execute the action
+            </summary>
+            <param name="civID">id of the civ</param>
+            <returns>delay of the action</returns>
+        </member>
+        <member name="M:WebCiv.Engine.PopAction.BasePopAction.ExecuteAction(System.Int32)">
+            <summary>
+            execute the action
+            </summary>
+            <param name="civID">Id of the civilization</param>
+        </member>
+        <member name="T:WebCiv.Engine.PopAction.PopActionReproduce">
+            <summary>
+            class action to repop the population
+            </summary>
+        </member>
+        <member name="F:WebCiv.Engine.PopAction.PopActionReproduce.Name">
+            <summary>
+            name of the population action
+            </summary>
+        </member>
+        <member name="M:WebCiv.Engine.PopAction.PopActionReproduce.#ctor">
+            <summary>
+            create the action pop action reproduce
+            </summary>
+        </member>
+        <member name="M:WebCiv.Engine.PopAction.PopActionReproduce.ExecuteAction(System.Int32)">
+            <summary>
+            execute the action
+            </summary>
+            <param name="civID">Id of the civilization</param>
+        </member>
+        <member name="M:WebCiv.Engine.PopAction.PopActionReproduce.GetDelay(System.Int32)">
+            <summary>
+            get the delay to execute the action
+            </summary>
+            <param name="civID">id of the civ</param>
+            <returns>delay of the action</returns>
         </member>
         <member name="T:WebCiv.Engine.Population">
             <summary>

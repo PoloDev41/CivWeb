@@ -22,10 +22,9 @@ namespace WebCiv.DAL
         /// <summary>
         /// Create a new DAL user, use to get information about the user
         /// </summary>
-        /// <param name="isInMemory">true, an option will be set to run the DB into memory</param>
-        public DAL_User(bool isInMemory)
+        public DAL_User()
         {
-            if(isInMemory)
+            if(ApplicationDbContext.IsRunningOnMemory)
             {
                 var options = new DbContextOptionsBuilder<ApplicationDbContext>()
                .UseInMemoryDatabase(databaseName: "Add_writes_to_database")
@@ -36,14 +35,6 @@ namespace WebCiv.DAL
             {
                 this.BDD_user = new ApplicationDbContext();
             }
-        }
-
-        /// <summary>
-        /// Create a new DAL user, use to get information about the user
-        /// </summary>
-        public DAL_User()
-        {
-            this.BDD_user = new ApplicationDbContext();
         }
 
         /// <summary>
@@ -139,7 +130,7 @@ namespace WebCiv.DAL
                     return false;
                 }
             }
-            catch (Exception)
+            catch (ArgumentNullException)
             {
                 return false;
             }

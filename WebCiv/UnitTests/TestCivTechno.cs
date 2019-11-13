@@ -9,10 +9,16 @@ namespace UnitTests
 {
     class TestCivTechno
     {
+        [SetUp]
+        public void Setup()
+        {
+            ApplicationDbContext.IsRunningOnMemory = true;
+        }
+
         [Test]
         public void TestTechnoOnCreation()
         {
-            using (IDAL_User dal = new DAL_User(true))
+            using (IDAL_User dal = new DAL_User())
             {
                 Assert.IsTrue(dal.CreatePlayer("TestCiv"));
                 var users = dal.GetAllUsers();

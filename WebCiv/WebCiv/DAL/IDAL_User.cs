@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -68,7 +69,10 @@ namespace WebCiv.DAL
         /// <returns>id</returns>
         public static int GetUserId(ClaimsPrincipal user)
         {
-            return int.Parse(user.FindFirst(ClaimTypes.NameIdentifier).Value);
+            if (user == null)
+                throw new ArgumentNullException(nameof(user));
+
+            return int.Parse(user.FindFirst(ClaimTypes.NameIdentifier).Value, CultureInfo.InvariantCulture);
         }
 
         /// <summary>
