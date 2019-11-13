@@ -15,6 +15,25 @@
             </summary>
             <param name="builder">builder</param>
         </member>
+        <member name="T:WebCiv.Areas.ScheduleService.SchedulerHostedService">
+            <summary>
+            class to schedule any tasks
+            </summary>
+        </member>
+        <member name="M:WebCiv.Areas.ScheduleService.SchedulerHostedService.StartAsync(System.Threading.CancellationToken)">
+            <summary>
+            start service
+            </summary>
+            <param name="cancellationToken">cancellationToken</param>
+            <returns>completed task</returns>
+        </member>
+        <member name="M:WebCiv.Areas.ScheduleService.SchedulerHostedService.StopAsync(System.Threading.CancellationToken)">
+            <summary>
+            Stop the service
+            </summary>
+            <param name="cancellationToken">cancellation token</param>
+            <returns>completed task</returns>
+        </member>
         <member name="T:WebCiv.Configuration.AppRole">
             <summary>
             Role use in Identity library
@@ -549,6 +568,34 @@
             </summary>
             <param name="technoName">name of the techno to progress on</param>
             <param name="tree">civilization techo tree</param>
+        </member>
+        <member name="T:WebCiv.Pages.CivilizationModel">
+            <summary>
+            model of the civilization view
+            </summary>
+        </member>
+        <member name="M:WebCiv.Pages.CivilizationModel.#ctor(WebCiv.DAL.ApplicationDbContext)">
+            <summary>
+            create a new civilization model
+            </summary>
+            <param name="context">Db context</param>
+        </member>
+        <member name="M:WebCiv.Pages.CivilizationModel.OnGet">
+            <summary>
+            On get
+            </summary>
+            <returns>action result</returns>
+        </member>
+        <member name="P:WebCiv.Pages.CivilizationModel.AppUser">
+            <summary>
+            Current user
+            </summary>
+        </member>
+        <member name="M:WebCiv.Pages.CivilizationModel.OnPostAsync">
+            <summary>
+            On post Async
+            </summary>
+            <returns>action result</returns>
         </member>
         <member name="T:WebCiv.Pages.IndexModel">
             <summary>
