@@ -12,11 +12,16 @@ namespace WebCiv.Engine.PopAction
     public class PopActionReproduce : BasePopAction
     {
         /// <summary>
+        /// name of the population action
+        /// </summary>
+        public const string Name = "Reproduce";
+
+        /// <summary>
         /// create the action pop action reproduce
         /// </summary>
         public PopActionReproduce()
         {
-            this.ActionName = "Reproduce";
+            this.ActionName = Name;
             this.Description = "Increase population";
         }
 
