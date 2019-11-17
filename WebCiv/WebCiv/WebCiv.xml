@@ -218,7 +218,13 @@
             <param name="civId">civ id</param>
             <returns>civilization</returns>
         </member>
-        <member name="M:WebCiv.DAL.DAL_Civ.IncreasePopulation(WebCiv.Engine.Civilization,System.Int32)">
+        <member name="M:WebCiv.DAL.DAL_Civ.GetAllCivilizationAndPopulation">
+            <summary>
+            return all civilizations
+            </summary>
+            <returns>civilizations</returns>
+        </member>
+        <member name="M:WebCiv.DAL.DAL_Civ.IncreasePopulation(WebCiv.Engine.Civilization,System.Double)">
             <summary>
             increase the population
             </summary>
@@ -317,6 +323,12 @@
             interface of the civilizations
             </summary>
         </member>
+        <member name="M:WebCiv.DAL.IDAL_Civ.GetAllCivilizationAndPopulation">
+            <summary>
+            return all civilizations
+            </summary>
+            <returns>civilizations</returns>
+        </member>
         <member name="M:WebCiv.DAL.IDAL_Civ.GetCivilizationAndPopulation(System.Int32)">
             <summary>
             return the civilization from the id
@@ -324,7 +336,7 @@
             <param name="civId">civ id</param>
             <returns>civilization</returns>
         </member>
-        <member name="M:WebCiv.DAL.IDAL_Civ.IncreasePopulation(WebCiv.Engine.Civilization,System.Int32)">
+        <member name="M:WebCiv.DAL.IDAL_Civ.IncreasePopulation(WebCiv.Engine.Civilization,System.Double)">
             <summary>
             increase the population
             </summary>
@@ -613,6 +625,17 @@
         <member name="P:WebCiv.Engine.Population.TotalPop">
             <summary>
             number of total population
+            </summary>
+        </member>
+        <member name="M:WebCiv.Engine.Population.IncreasePopulation">
+            <summary>
+            return the amount to increase the population
+            </summary>
+            <returns>number of population to increase</returns>
+        </member>
+        <member name="M:WebCiv.Engine.Population.RoutineGrowAllPopulations">
+            <summary>
+            routine to cyclically execute to grow all populations of the game
             </summary>
         </member>
         <member name="T:WebCiv.Engine.TechnologyTree.BaseTechnology">

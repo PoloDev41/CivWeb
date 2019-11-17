@@ -12,6 +12,12 @@ namespace WebCiv.DAL
     public interface IDAL_Civ : IDisposable
     {
         /// <summary>
+        /// return all civilizations
+        /// </summary>
+        /// <returns>civilizations</returns>
+        public List<Civilization> GetAllCivilizationAndPopulation();
+
+        /// <summary>
         /// return the civilization from the id
         /// </summary>
         /// <param name="civId">civ id</param>
@@ -23,6 +29,6 @@ namespace WebCiv.DAL
         /// </summary>
         /// <param name="civ">civilization to update</param>
         /// <param name="amount">amount to add</param>
-        public void IncreasePopulation(Civilization civ, int amount);
+        public void IncreasePopulation(Civilization civ, double amount);
     }
 }
