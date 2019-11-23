@@ -93,9 +93,10 @@ namespace WebCiv.DAL
             {
                 throw new ArgumentNullException(nameof(civ));
             }
-
             civ.Population.TotalPop += amount;
+            this.BDContext.Entry(civ.Population).State = EntityState.Modified;
             this.BDContext.SaveChanges();
         }
+
     }
 }

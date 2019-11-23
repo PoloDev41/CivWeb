@@ -32,13 +32,19 @@ namespace UnitTests
                 var bdd_user = dal.GetUser(user.Id);
                 civID = bdd_user.UserCiv.Id;
             }
+            double startPop = 0;
+            using (var dal = new DAL_Civ())
+            {
+                var civ = dal.GetCivilizationAndPopulation(civID);
+                startPop = civ.Population.TotalPop;
+                Assert.AreNotEqual(0, startPop);
+            }
+            
+            Population.RoutineGrowAllPopulations();
 
             using (var dal = new DAL_Civ())
             {
                 var civ = dal.GetCivilizationAndPopulation(civID);
-                double startPop = civ.Population.TotalPop;
-                Population.RoutineGrowAllPopulations();
-                civ = dal.GetCivilizationAndPopulation(civID);
                 var total = dal.GetAllCivilizationAndPopulation();
                 Assert.AreNotEqual(startPop, civ.Population.TotalPop);
             }
