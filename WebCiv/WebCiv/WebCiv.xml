@@ -20,6 +20,12 @@
             class with an action to execute at specific time
             </summary>
         </member>
+        <member name="T:WebCiv.Areas.ScheduleService.ScheduledTask.ActionTask">
+            <summary>
+            delegate of the action
+            </summary>
+            <param name="dBContext"></param>
+        </member>
         <member name="P:WebCiv.Areas.ScheduleService.ScheduledTask.Task">
             <summary>
             Scheduled task
@@ -35,14 +41,14 @@
             Delay between 2 execution, if null, the task will be execute only one time
             </summary>
         </member>
-        <member name="M:WebCiv.Areas.ScheduleService.ScheduledTask.#ctor(System.Action,System.TimeSpan)">
+        <member name="M:WebCiv.Areas.ScheduleService.ScheduledTask.#ctor(WebCiv.Areas.ScheduleService.ScheduledTask.ActionTask,System.TimeSpan)">
             <summary>
             create a new scheduled task with no cyclic execution
             </summary>
             <param name="task">task to execute</param>
             <param name="delay">delay before execute the task</param>
         </member>
-        <member name="M:WebCiv.Areas.ScheduleService.ScheduledTask.#ctor(System.Action,System.Nullable{System.TimeSpan},System.TimeSpan)">
+        <member name="M:WebCiv.Areas.ScheduleService.ScheduledTask.#ctor(WebCiv.Areas.ScheduleService.ScheduledTask.ActionTask,System.Nullable{System.TimeSpan},System.TimeSpan)">
             <summary>
             Create a new scheduled task with cyclic execution
             </summary>
@@ -71,6 +77,12 @@
             add a new schelued task
             </summary>
             <param name="scheduledTask">scheduled task to add</param>
+        </member>
+        <member name="M:WebCiv.Areas.ScheduleService.ScheduledTaskBuffer.GetDelayToMidnight">
+            <summary>
+            return the delay until next midnight
+            </summary>
+            <returns>delay until next midnight</returns>
         </member>
         <member name="T:WebCiv.Areas.ScheduleService.SchedulerHostedService">
             <summary>
@@ -633,7 +645,7 @@
             </summary>
             <returns>number of population to increase</returns>
         </member>
-        <member name="M:WebCiv.Engine.Population.RoutineGrowAllPopulations">
+        <member name="M:WebCiv.Engine.Population.RoutineGrowAllPopulations(WebCiv.DAL.ApplicationDbContext)">
             <summary>
             routine to cyclically execute to grow all populations of the game
             </summary>

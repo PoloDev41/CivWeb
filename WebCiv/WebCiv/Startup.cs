@@ -47,6 +47,7 @@ namespace WebCiv
                 cfg.UseSqlServer(connectionString);
             });
             services.AddSingleton<IEmailSender, AuthMessageSender>();
+            
             services.AddHostedService<SchedulerHostedService>();
             services.AddRazorPages();
         }

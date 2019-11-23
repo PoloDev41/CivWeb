@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -6,6 +7,9 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
+using WebCiv.DAL;
+using WebCiv.Engine;
+using static WebCiv.Areas.ScheduleService.ScheduledTask;
 
 namespace WebCiv.Areas.ScheduleService
 {
@@ -14,6 +18,11 @@ namespace WebCiv.Areas.ScheduleService
     /// </summary>
     public class SchedulerHostedService : IHostedService
     {
+        /// <summary>
+        /// ratio to accelerate the scheduler service
+        /// </summary>
+        private int AcceleratorRate = 1;
+
         /// <summary>
         /// generate of id for identify tasks
         /// </summary>
@@ -35,6 +44,19 @@ namespace WebCiv.Areas.ScheduleService
         private System.Timers.Timer _timer { get; set; }
 
         /// <summary>
+        /// service provider
+        /// </summary>
+        private readonly IServiceProvider _serviceProvider;
+        /// <summary>
+        /// create a scheduler hosted service
+        /// </summary>
+        /// <param name="serviceProvider">service provider</param>
+        public SchedulerHostedService(IServiceProvider serviceProvider)
+        {
+            _serviceProvider = serviceProvider;
+        }
+
+        /// <summary>
         /// start service
         /// </summary>
         /// <param name="cancellationToken">cancellationToken</param>
@@ -50,7 +72,9 @@ namespace WebCiv.Areas.ScheduleService
             _timer.Enabled = true;
 
             ScheduledTaskBuffer.Initialize(this);
-            
+
+            ScheduledTaskBuffer.AddScheduledTask(new ScheduledTask(Population.RoutineGrowAllPopulations, TimeSpan.FromDays(1), ScheduledTaskBuffer.GetDelayToMidnight()));
+
             return Task.CompletedTask;
         }
 
@@ -65,25 +89,28 @@ namespace WebCiv.Areas.ScheduleService
                     this._pendingTasks.Add(new TimingTask(result));
                 }
             }
-
-            for (int i = this._pendingTasks.Count - 1; i >= 0; i--)
+            using (var scope = _serviceProvider.CreateScope())
             {
-                var task = this._pendingTasks[i];
-                if(task.RemainingTime.TotalSeconds <= 1)
+                var myDbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                for (int i = this._pendingTasks.Count - 1; i >= 0; i--)
                 {
-                    task.Task.Task();
-                    if(task.Task.Schedule != null)
+                    var task = this._pendingTasks[i];
+                    if (task.RemainingTime.TotalSeconds <= 1)
                     {
-                        task.RemainingTime = task.Task.Schedule.Value;
+                        task.Task.Task(myDbContext);
+                        if (task.Task.Schedule != null)
+                        {
+                            task.RemainingTime = task.Task.Schedule.Value;
+                        }
+                        else
+                        {
+                            this._pendingTasks.RemoveAt(i);
+                        }
                     }
                     else
                     {
-                        this._pendingTasks.RemoveAt(i);
+                        task.RemainingTime = task.RemainingTime.Subtract(TimeSpan.FromSeconds(1 * AcceleratorRate));
                     }
-                }
-                else
-                {
-                    task.RemainingTime = task.RemainingTime.Subtract(TimeSpan.FromSeconds(1));
                 }
             }
             try
@@ -92,7 +119,7 @@ namespace WebCiv.Areas.ScheduleService
             }
             catch (Exception)
             {
-                //do nothing, the timer can be disposed
+                //do nothing, the timer should be disposed
             }            
         }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using WebCiv.DAL;
 
 namespace WebCiv.Areas.ScheduleService
 {
@@ -8,9 +9,15 @@ namespace WebCiv.Areas.ScheduleService
     public class ScheduledTask
     {
         /// <summary>
+        /// delegate of the action
+        /// </summary>
+        /// <param name="dBContext"></param>
+        public delegate void ActionTask(ApplicationDbContext dBContext);
+
+        /// <summary>
         /// Scheduled task
         /// </summary>
-        public Action Task { get; private set; }
+        public ActionTask Task { get; private set; }
 
         /// <summary>
         /// time to start the scheduled task
@@ -27,7 +34,7 @@ namespace WebCiv.Areas.ScheduleService
         /// </summary>
         /// <param name="task">task to execute</param>
         /// <param name="delay">delay before execute the task</param>
-        public ScheduledTask(Action task, TimeSpan delay) : this(task, null, delay)
+        public ScheduledTask(ActionTask task, TimeSpan delay) : this(task, null, delay)
         {
             
         }
@@ -38,7 +45,7 @@ namespace WebCiv.Areas.ScheduleService
         /// <param name="task">task to execute</param>
         /// <param name="schedule">delay between 2 executiions of the task</param>
         /// <param name="delay">delay before executing the 1st task</param>
-        public ScheduledTask(Action task, TimeSpan? schedule, TimeSpan delay)
+        public ScheduledTask(ActionTask task, TimeSpan? schedule, TimeSpan delay)
         {
             StartTiming = delay;
             Schedule = schedule;

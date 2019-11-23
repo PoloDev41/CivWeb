@@ -33,5 +33,18 @@ namespace WebCiv.Areas.ScheduleService
         {
             return _scheduler.AddNewTask(scheduledTask);
         }
+
+        /// <summary>
+        /// return the delay until next midnight
+        /// </summary>
+        /// <returns>delay until next midnight</returns>
+        public static TimeSpan GetDelayToMidnight()
+        {
+            DateTime now = DateTime.Now;
+            DateTime tomorrow = now.AddDays(1);
+            DateTime midnight = new DateTime(tomorrow.Year, tomorrow.Month,
+                                    tomorrow.Day, 0, 0, 0);
+            return now - midnight;
+        }
     }
 }

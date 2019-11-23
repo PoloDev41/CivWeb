@@ -35,6 +35,11 @@ namespace WebCiv.DAL
             }
         }
 
+        public DAL_Civ(ApplicationDbContext bdContext)
+        {
+            BDContext = bdContext;
+        }
+
         /// <summary>
         /// dispose
         /// </summary>

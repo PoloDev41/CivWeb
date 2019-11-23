@@ -50,13 +50,16 @@ namespace WebCiv.Pages
         [BindProperty]
         public AppUser AppUser { get; set; }
 
+
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        /// <summary>
-        /// On post Async
-        /// </summary>
-        /// <returns>action result</returns>
+#pragma warning disable CS1998 // Cette méthode async n'a pas d'opérateur 'await' et elle s'exécutera de façon synchrone
+                              /// <summary>
+                              /// On post Async
+                              /// </summary>
+                              /// <returns>action result</returns>
         public async Task<IActionResult> OnPostAsync()
+#pragma warning restore CS1998 // Cette méthode async n'a pas d'opérateur 'await' et elle s'exécutera de façon synchrone
         {
             if (!ModelState.IsValid)
             {

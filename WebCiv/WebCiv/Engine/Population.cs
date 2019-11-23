@@ -33,9 +33,9 @@ namespace WebCiv.Engine
         /// <summary>
         /// routine to cyclically execute to grow all populations of the game
         /// </summary>
-        public static void RoutineGrowAllPopulations()
+        public static void RoutineGrowAllPopulations(ApplicationDbContext bdContext)
         {
-            using (var dal = new DAL_Civ())
+            using (var dal = new DAL_Civ(bdContext))
             {
                 var civs = dal.GetAllCivilizationAndPopulation();
                 foreach (var civ in civs)
