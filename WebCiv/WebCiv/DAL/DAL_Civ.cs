@@ -20,7 +20,8 @@ namespace WebCiv.DAL
         /// <summary>
         /// Create a new DAL civilization, use to get information about the user
         /// </summary>
-        public DAL_Civ()
+        /// <param name="bdContext">DbContext</param>
+        public DAL_Civ(ApplicationDbContext bdContext)
         {
             if (ApplicationDbContext.IsRunningOnMemory)
             {
@@ -31,13 +32,8 @@ namespace WebCiv.DAL
             }
             else
             {
-                this.BDContext = new ApplicationDbContext();
-            }
-        }
-
-        public DAL_Civ(ApplicationDbContext bdContext)
-        {
-            BDContext = bdContext;
+                BDContext = bdContext;
+            }   
         }
 
         /// <summary>

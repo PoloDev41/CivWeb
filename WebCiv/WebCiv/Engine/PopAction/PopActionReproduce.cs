@@ -29,9 +29,10 @@ namespace WebCiv.Engine.PopAction
         /// execute the action
         /// </summary>
         /// <param name="civID">Id of the civilization</param>
-        public override void ExecuteAction(int civID)
+        /// <param name="bdContext">bdContext</param>
+        public override void ExecuteAction(int civID, ApplicationDbContext bdContext)
         {
-            using (IDAL_Civ dal = new DAL_Civ())
+            using (IDAL_Civ dal = new DAL_Civ(bdContext))
             {
                 var civ = dal.GetCivilizationAndPopulation(civID);
                 dal.IncreasePopulation(civ, (int)Math.Max(1,((double)civ.Population.TotalPop*0.1f)));

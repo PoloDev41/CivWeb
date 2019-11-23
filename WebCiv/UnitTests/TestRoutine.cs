@@ -33,16 +33,16 @@ namespace UnitTests
                 civID = bdd_user.UserCiv.Id;
             }
             double startPop = 0;
-            using (var dal = new DAL_Civ())
+            using (var dal = new DAL_Civ(null))
             {
                 var civ = dal.GetCivilizationAndPopulation(civID);
                 startPop = civ.Population.TotalPop;
                 Assert.AreNotEqual(0, startPop);
             }
             
-            Population.RoutineGrowAllPopulations();
+            Population.RoutineGrowAllPopulations(null);
 
-            using (var dal = new DAL_Civ())
+            using (var dal = new DAL_Civ(null))
             {
                 var civ = dal.GetCivilizationAndPopulation(civID);
                 var total = dal.GetAllCivilizationAndPopulation();

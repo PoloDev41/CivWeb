@@ -12,11 +12,11 @@ namespace UnitTests
         [Test]
         public void TestAddNotCyclicTask()
         {
-            SchedulerHostedService shs = new SchedulerHostedService();
+            SchedulerHostedService shs = new SchedulerHostedService(null);
             shs.StartAsync(new CancellationToken());
 
             Semaphore mut = new Semaphore(0, 1);
-            ScheduledTaskBuffer.AddScheduledTask(new ScheduledTask(() => mut.Release(), TimeSpan.FromSeconds(1)));
+            ScheduledTaskBuffer.AddScheduledTask(new ScheduledTask((x) => mut.Release(), TimeSpan.FromSeconds(1)));
 
             try
             {
@@ -35,11 +35,11 @@ namespace UnitTests
         [Test]
         public void TestAddCyclicTask()
         {
-            SchedulerHostedService shs = new SchedulerHostedService();
+            SchedulerHostedService shs = new SchedulerHostedService(null);
             shs.StartAsync(new CancellationToken());
 
             Semaphore mut = new Semaphore(0, 3);
-            ScheduledTaskBuffer.AddScheduledTask(new ScheduledTask(() => mut.Release(), TimeSpan.FromSeconds(2), TimeSpan.FromSeconds(0)));
+            ScheduledTaskBuffer.AddScheduledTask(new ScheduledTask((x) => mut.Release(), TimeSpan.FromSeconds(2), TimeSpan.FromSeconds(0)));
 
             try
             {

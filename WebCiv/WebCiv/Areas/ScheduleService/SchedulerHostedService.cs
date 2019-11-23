@@ -89,28 +89,33 @@ namespace WebCiv.Areas.ScheduleService
                     this._pendingTasks.Add(new TimingTask(result));
                 }
             }
-            using (var scope = _serviceProvider.CreateScope())
+            IServiceScope scope = null; 
+            ApplicationDbContext myDbContext = null; 
+
+            if(_serviceProvider != null)
             {
-                var myDbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-                for (int i = this._pendingTasks.Count - 1; i >= 0; i--)
+                scope = _serviceProvider.CreateScope();
+                myDbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+            }
+
+            for (int i = this._pendingTasks.Count - 1; i >= 0; i--)
+            {
+                var task = this._pendingTasks[i];
+                if (task.RemainingTime.TotalSeconds <= 1)
                 {
-                    var task = this._pendingTasks[i];
-                    if (task.RemainingTime.TotalSeconds <= 1)
+                    task.Task.Task(myDbContext);
+                    if (task.Task.Schedule != null)
                     {
-                        task.Task.Task(myDbContext);
-                        if (task.Task.Schedule != null)
-                        {
-                            task.RemainingTime = task.Task.Schedule.Value;
-                        }
-                        else
-                        {
-                            this._pendingTasks.RemoveAt(i);
-                        }
+                        task.RemainingTime = task.Task.Schedule.Value;
                     }
                     else
                     {
-                        task.RemainingTime = task.RemainingTime.Subtract(TimeSpan.FromSeconds(1 * AcceleratorRate));
+                        this._pendingTasks.RemoveAt(i);
                     }
+                }
+                else
+                {
+                    task.RemainingTime = task.RemainingTime.Subtract(TimeSpan.FromSeconds(1 * AcceleratorRate));
                 }
             }
             try

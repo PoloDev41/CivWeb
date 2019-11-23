@@ -26,9 +26,9 @@ namespace UnitTests
 
             var actionReproduce = new PopActionReproduce();
             Assert.IsTrue(actionReproduce.GetDelay(user.UserCiv.Id).TotalSeconds > 0);
-            actionReproduce.ExecuteAction(user.UserCiv.Id);
+            actionReproduce.ExecuteAction(user.UserCiv.Id, null);
 
-            using (IDAL_Civ dal = new DAL_Civ())
+            using (IDAL_Civ dal = new DAL_Civ(null))
             {
                 var updateCiv = dal.GetCivilizationAndPopulation(user.UserCiv.Id);
                 Assert.Greater(updateCiv.Population.TotalPop, originalPop);
