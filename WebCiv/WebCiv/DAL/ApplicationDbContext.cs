@@ -34,10 +34,8 @@ namespace WebCiv.DAL
         /// <summary>
         /// Create a new applciation DB context
         /// </summary>
-        public ApplicationDbContext() 
+        public ApplicationDbContext()
         {
-
         }
-
     }
 }

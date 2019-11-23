@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WebCiv.Areas;
+using WebCiv.Areas.ScheduleService;
 using WebCiv.Configuration;
 using WebCiv.DAL;
 
@@ -46,6 +47,8 @@ namespace WebCiv
                 cfg.UseSqlServer(connectionString);
             });
             services.AddSingleton<IEmailSender, AuthMessageSender>();
+            
+            services.AddHostedService<SchedulerHostedService>();
             services.AddRazorPages();
         }
 

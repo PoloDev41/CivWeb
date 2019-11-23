@@ -13,6 +13,7 @@ namespace WebCiv.Engine.TechnologyTree
         /// <summary>
         /// linked technologies of this tech
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2227:Collection properties should be read only", Justification = "EF doesn't handle const field")]
         public List<BaseTechnology> LinkedTechnology { get; set; }
 
         /// <summary>

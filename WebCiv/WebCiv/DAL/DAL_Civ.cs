@@ -20,7 +20,8 @@ namespace WebCiv.DAL
         /// <summary>
         /// Create a new DAL civilization, use to get information about the user
         /// </summary>
-        public DAL_Civ()
+        /// <param name="bdContext">DbContext</param>
+        public DAL_Civ(ApplicationDbContext bdContext)
         {
             if (ApplicationDbContext.IsRunningOnMemory)
             {
@@ -31,8 +32,8 @@ namespace WebCiv.DAL
             }
             else
             {
-                this.BDContext = new ApplicationDbContext();
-            }
+                BDContext = bdContext;
+            }   
         }
 
         /// <summary>
@@ -72,19 +73,31 @@ namespace WebCiv.DAL
         }
 
         /// <summary>
+        /// return all civilizations
+        /// </summary>
+        /// <returns>civilizations</returns>
+        public List<Civilization> GetAllCivilizationAndPopulation()
+        { 
+            return this.BDContext.Civilizations
+                .Include(x => x.Population)
+                .ToList();
+        }
+
+        /// <summary>
         /// increase the population
         /// </summary>
         /// <param name="civ">civilization to update</param>
         /// <param name="amount">amount to add</param>
-        public void IncreasePopulation(Civilization civ, int amount)
+        public void IncreasePopulation(Civilization civ, double amount)
         {
             if(civ == null)
             {
                 throw new ArgumentNullException(nameof(civ));
             }
-
             civ.Population.TotalPop += amount;
+            this.BDContext.Entry(civ.Population).State = EntityState.Modified;
             this.BDContext.SaveChanges();
         }
+
     }
 }

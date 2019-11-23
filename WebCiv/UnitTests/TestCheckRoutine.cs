@@ -8,7 +8,7 @@ using WebCiv;
 
 namespace EngineUnitTest
 {
-    public class UnitTestCheckRoutine
+    public class TestCheckRoutine
     {
         private TestServer _server;
         private HttpClient _client;

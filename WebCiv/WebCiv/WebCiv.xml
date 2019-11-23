@@ -15,6 +15,158 @@
             </summary>
             <param name="builder">builder</param>
         </member>
+        <member name="T:WebCiv.Areas.ScheduleService.ScheduledTask">
+            <summary>
+            class with an action to execute at specific time
+            </summary>
+        </member>
+        <member name="T:WebCiv.Areas.ScheduleService.ScheduledTask.ActionTask">
+            <summary>
+            delegate of the action
+            </summary>
+            <param name="dBContext"></param>
+        </member>
+        <member name="P:WebCiv.Areas.ScheduleService.ScheduledTask.Task">
+            <summary>
+            Scheduled task
+            </summary>
+        </member>
+        <member name="P:WebCiv.Areas.ScheduleService.ScheduledTask.StartTiming">
+            <summary>
+            time to start the scheduled task
+            </summary>
+        </member>
+        <member name="P:WebCiv.Areas.ScheduleService.ScheduledTask.Schedule">
+            <summary>
+            Delay between 2 execution, if null, the task will be execute only one time
+            </summary>
+        </member>
+        <member name="M:WebCiv.Areas.ScheduleService.ScheduledTask.#ctor(WebCiv.Areas.ScheduleService.ScheduledTask.ActionTask,System.TimeSpan)">
+            <summary>
+            create a new scheduled task with no cyclic execution
+            </summary>
+            <param name="task">task to execute</param>
+            <param name="delay">delay before execute the task</param>
+        </member>
+        <member name="M:WebCiv.Areas.ScheduleService.ScheduledTask.#ctor(WebCiv.Areas.ScheduleService.ScheduledTask.ActionTask,System.Nullable{System.TimeSpan},System.TimeSpan)">
+            <summary>
+            Create a new scheduled task with cyclic execution
+            </summary>
+            <param name="task">task to execute</param>
+            <param name="schedule">delay between 2 executiions of the task</param>
+            <param name="delay">delay before executing the 1st task</param>
+        </member>
+        <member name="T:WebCiv.Areas.ScheduleService.ScheduledTaskBuffer">
+            <summary>
+            class to buffer scheduled tasks
+            </summary>
+        </member>
+        <member name="F:WebCiv.Areas.ScheduleService.ScheduledTaskBuffer._scheduler">
+            <summary>
+            scheduler service
+            </summary>
+        </member>
+        <member name="M:WebCiv.Areas.ScheduleService.ScheduledTaskBuffer.Initialize(WebCiv.Areas.ScheduleService.SchedulerHostedService)">
+            <summary>
+            initialize the class
+            </summary>
+            <param name="schedulerService">used service to schedule task</param>
+        </member>
+        <member name="M:WebCiv.Areas.ScheduleService.ScheduledTaskBuffer.AddScheduledTask(WebCiv.Areas.ScheduleService.ScheduledTask)">
+            <summary>
+            add a new schelued task
+            </summary>
+            <param name="scheduledTask">scheduled task to add</param>
+        </member>
+        <member name="M:WebCiv.Areas.ScheduleService.ScheduledTaskBuffer.GetDelayToMidnight">
+            <summary>
+            return the delay until next midnight
+            </summary>
+            <returns>delay until next midnight</returns>
+        </member>
+        <member name="T:WebCiv.Areas.ScheduleService.SchedulerHostedService">
+            <summary>
+            class to schedule any tasks
+            </summary>
+        </member>
+        <member name="F:WebCiv.Areas.ScheduleService.SchedulerHostedService.AcceleratorRate">
+            <summary>
+            ratio to accelerate the scheduler service
+            </summary>
+        </member>
+        <member name="P:WebCiv.Areas.ScheduleService.SchedulerHostedService._idGenerator">
+            <summary>
+            generate of id for identify tasks
+            </summary>
+        </member>
+        <member name="P:WebCiv.Areas.ScheduleService.SchedulerHostedService._taskBuffer">
+            <summary>
+            buffer to store tasks before add them in the pending task list
+            </summary>
+        </member>
+        <member name="P:WebCiv.Areas.ScheduleService.SchedulerHostedService._pendingTasks">
+            <summary>
+            task which will execute on the next timer event
+            </summary>
+        </member>
+        <member name="P:WebCiv.Areas.ScheduleService.SchedulerHostedService._timer">
+            <summary>
+            timer
+            </summary>
+        </member>
+        <member name="F:WebCiv.Areas.ScheduleService.SchedulerHostedService._serviceProvider">
+            <summary>
+            service provider
+            </summary>
+        </member>
+        <member name="M:WebCiv.Areas.ScheduleService.SchedulerHostedService.#ctor(System.IServiceProvider)">
+            <summary>
+            create a scheduler hosted service
+            </summary>
+            <param name="serviceProvider">service provider</param>
+        </member>
+        <member name="M:WebCiv.Areas.ScheduleService.SchedulerHostedService.StartAsync(System.Threading.CancellationToken)">
+            <summary>
+            start service
+            </summary>
+            <param name="cancellationToken">cancellationToken</param>
+            <returns>completed task</returns>
+        </member>
+        <member name="M:WebCiv.Areas.ScheduleService.SchedulerHostedService.StopAsync(System.Threading.CancellationToken)">
+            <summary>
+            Stop the service
+            </summary>
+            <param name="cancellationToken">cancellation token</param>
+            <returns>completed task</returns>
+        </member>
+        <member name="M:WebCiv.Areas.ScheduleService.SchedulerHostedService.AddNewTask(WebCiv.Areas.ScheduleService.ScheduledTask)">
+            <summary>
+            add the task to the scheduler
+            </summary>
+            <param name="scheduledTask">scheduled task</param>
+            <returns>id of the task</returns>
+        </member>
+        <member name="T:WebCiv.Areas.ScheduleService.TimingTask">
+            <summary>
+            class to add a timing on a scheduled task
+            </summary>
+        </member>
+        <member name="P:WebCiv.Areas.ScheduleService.TimingTask.Task">
+            <summary>
+            scheduled task to execute
+            </summary>
+        </member>
+        <member name="P:WebCiv.Areas.ScheduleService.TimingTask.RemainingTime">
+            <summary>
+            remaining time before execute the task
+            </summary>
+        </member>
+        <member name="M:WebCiv.Areas.ScheduleService.TimingTask.#ctor(WebCiv.Areas.ScheduleService.ScheduledTask)">
+            <summary>
+            create a new timing task
+            </summary>
+            <param name="task">task to scheduled</param>
+        </member>
         <member name="T:WebCiv.Configuration.AppRole">
             <summary>
             Role use in Identity library
@@ -71,10 +223,11 @@
             context of the civilization
             </summary>
         </member>
-        <member name="M:WebCiv.DAL.DAL_Civ.#ctor">
+        <member name="M:WebCiv.DAL.DAL_Civ.#ctor(WebCiv.DAL.ApplicationDbContext)">
             <summary>
             Create a new DAL civilization, use to get information about the user
             </summary>
+            <param name="bdContext">DbContext</param>
         </member>
         <member name="M:WebCiv.DAL.DAL_Civ.Dispose">
             <summary>
@@ -94,7 +247,13 @@
             <param name="civId">civ id</param>
             <returns>civilization</returns>
         </member>
-        <member name="M:WebCiv.DAL.DAL_Civ.IncreasePopulation(WebCiv.Engine.Civilization,System.Int32)">
+        <member name="M:WebCiv.DAL.DAL_Civ.GetAllCivilizationAndPopulation">
+            <summary>
+            return all civilizations
+            </summary>
+            <returns>civilizations</returns>
+        </member>
+        <member name="M:WebCiv.DAL.DAL_Civ.IncreasePopulation(WebCiv.Engine.Civilization,System.Double)">
             <summary>
             increase the population
             </summary>
@@ -193,6 +352,12 @@
             interface of the civilizations
             </summary>
         </member>
+        <member name="M:WebCiv.DAL.IDAL_Civ.GetAllCivilizationAndPopulation">
+            <summary>
+            return all civilizations
+            </summary>
+            <returns>civilizations</returns>
+        </member>
         <member name="M:WebCiv.DAL.IDAL_Civ.GetCivilizationAndPopulation(System.Int32)">
             <summary>
             return the civilization from the id
@@ -200,7 +365,7 @@
             <param name="civId">civ id</param>
             <returns>civilization</returns>
         </member>
-        <member name="M:WebCiv.DAL.IDAL_Civ.IncreasePopulation(WebCiv.Engine.Civilization,System.Int32)">
+        <member name="M:WebCiv.DAL.IDAL_Civ.IncreasePopulation(WebCiv.Engine.Civilization,System.Double)">
             <summary>
             increase the population
             </summary>
@@ -442,11 +607,12 @@
             <param name="civID">id of the civ</param>
             <returns>delay of the action</returns>
         </member>
-        <member name="M:WebCiv.Engine.PopAction.BasePopAction.ExecuteAction(System.Int32)">
+        <member name="M:WebCiv.Engine.PopAction.BasePopAction.ExecuteAction(System.Int32,WebCiv.DAL.ApplicationDbContext)">
             <summary>
             execute the action
             </summary>
             <param name="civID">Id of the civilization</param>
+            <param name="bdContext">DBContext</param>
         </member>
         <member name="T:WebCiv.Engine.PopAction.PopActionReproduce">
             <summary>
@@ -463,11 +629,12 @@
             create the action pop action reproduce
             </summary>
         </member>
-        <member name="M:WebCiv.Engine.PopAction.PopActionReproduce.ExecuteAction(System.Int32)">
+        <member name="M:WebCiv.Engine.PopAction.PopActionReproduce.ExecuteAction(System.Int32,WebCiv.DAL.ApplicationDbContext)">
             <summary>
             execute the action
             </summary>
             <param name="civID">Id of the civilization</param>
+            <param name="bdContext">bdContext</param>
         </member>
         <member name="M:WebCiv.Engine.PopAction.PopActionReproduce.GetDelay(System.Int32)">
             <summary>
@@ -489,6 +656,17 @@
         <member name="P:WebCiv.Engine.Population.TotalPop">
             <summary>
             number of total population
+            </summary>
+        </member>
+        <member name="M:WebCiv.Engine.Population.IncreasePopulation">
+            <summary>
+            return the amount to increase the population
+            </summary>
+            <returns>number of population to increase</returns>
+        </member>
+        <member name="M:WebCiv.Engine.Population.RoutineGrowAllPopulations(WebCiv.DAL.ApplicationDbContext)">
+            <summary>
+            routine to cyclically execute to grow all populations of the game
             </summary>
         </member>
         <member name="T:WebCiv.Engine.TechnologyTree.BaseTechnology">
@@ -549,6 +727,34 @@
             </summary>
             <param name="technoName">name of the techno to progress on</param>
             <param name="tree">civilization techo tree</param>
+        </member>
+        <member name="T:WebCiv.Pages.CivilizationModel">
+            <summary>
+            model of the civilization view
+            </summary>
+        </member>
+        <member name="M:WebCiv.Pages.CivilizationModel.#ctor(WebCiv.DAL.ApplicationDbContext)">
+            <summary>
+            create a new civilization model
+            </summary>
+            <param name="context">Db context</param>
+        </member>
+        <member name="M:WebCiv.Pages.CivilizationModel.OnGet">
+            <summary>
+            On get
+            </summary>
+            <returns>action result</returns>
+        </member>
+        <member name="P:WebCiv.Pages.CivilizationModel.AppUser">
+            <summary>
+            Current user
+            </summary>
+        </member>
+        <member name="M:WebCiv.Pages.CivilizationModel.OnPostAsync">
+            <summary>
+            On post Async
+            </summary>
+            <returns>action result</returns>
         </member>
         <member name="T:WebCiv.Pages.IndexModel">
             <summary>

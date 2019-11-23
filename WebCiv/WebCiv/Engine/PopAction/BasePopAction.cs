@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebCiv.DAL;
 
 namespace WebCiv.Engine.PopAction
 {
@@ -31,6 +32,7 @@ namespace WebCiv.Engine.PopAction
         /// execute the action
         /// </summary>
         /// <param name="civID">Id of the civilization</param>
-        public abstract void ExecuteAction(int civID);
+        /// <param name="bdContext">DBContext</param>
+        public abstract void ExecuteAction(int civID, ApplicationDbContext bdContext);
     }
 }
